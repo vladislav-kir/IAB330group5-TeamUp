@@ -14,8 +14,8 @@ namespace TeamUp.Models
         public string name { get; set; }
         public string phone { get; set; }
         public Dictionary<string, string> role { get; set; }
-
         public List<String> team { get; set; }
+        public string avatar { get; set; }
 
         public override string ToString()
         {

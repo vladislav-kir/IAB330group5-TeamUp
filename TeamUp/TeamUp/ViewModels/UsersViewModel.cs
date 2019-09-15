@@ -5,12 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using TeamUp.Models;
 using System.Linq;
+using Firebase.Storage;
 
 namespace TeamUp.ViewModels
 {
     public class UserViewModel
     {
-        
+        FirebaseStorage firebaseStorage;
+
+        public UserViewModel()
+        {
+            // Init connection to Firebase Storage
+            firebaseStorage = new FirebaseStorage("teamup-b7a43.appspot.com");
+        }
+
+        public async Task<String> GetUserAvatarURL(User user)
+        {
+            return await firebaseStorage
+                .Child("images")
+                .Child("user")
+                .Child(user.name)
+                .Child(user.avatar)
+                .GetDownloadUrlAsync();
+        }
+
         /*
          Get Specific User based on its ID.
          Please go to Firestore database to look it up
@@ -26,6 +44,9 @@ namespace TeamUp.ViewModels
 
             // Convert Document to User Model
             var user = document.ToObject<User>();
+
+            // Download avatar image
+            user.avatar = await GetUserAvatarURL(user);
 
             return user;
         }
@@ -46,6 +67,9 @@ namespace TeamUp.ViewModels
             // Convert Document to User Model & get the First Result
             var user = query.ToObjects<User>().ToList().First();
 
+            // Download avatar image
+            user.avatar = await GetUserAvatarURL(user);
+
             return user;
         }
 
@@ -62,9 +86,17 @@ namespace TeamUp.ViewModels
                                      .GetDocumentsAsync();
 
             // Convert to List of User Model
-            var UserList = query.ToObjects<User>().ToList();
+            var UsersList = query.ToObjects<User>().ToList();
 
-            return UserList;
+            // Download avatar image for each User in the UserList
+            UsersList.ForEach(async user =>
+            {
+                user.avatar = await GetUserAvatarURL(user);
+            });
+
+            return UsersList;
         }
+
+        
     }
 }

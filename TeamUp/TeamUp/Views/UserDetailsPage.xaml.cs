@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TeamUp.Models;
+using TeamUp.ViewModels;
 
 namespace TeamUp.Views
 {
@@ -14,20 +15,24 @@ namespace TeamUp.Views
     public partial class UserDetailsPage : ContentPage
     {
         private User user;
+        private UserViewModel userViewModel = new UserViewModel();
+
         public UserDetailsPage(User user)
         {
             InitializeComponent();
             this.user = user;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            name.Text = user.name;
-            phone.Text = user.phone;
-            email.Text = user.email;
-            age.Text = user.age.ToString();
-            bio.Text = user.bio;
+
+            avatarView.Source = user.avatar;
+            nameView.Text = user.name;
+            phoneView.Text = user.phone;
+            emailView.Text = user.email;
+            ageView.Text = user.age.ToString();
+            bioView.Text = user.bio;
         }
     }
 }

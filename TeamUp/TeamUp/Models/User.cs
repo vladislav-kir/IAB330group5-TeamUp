@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TeamUp.Models
 {
-    class User
+    public class User
     {
         public int age { get; set; }
         public string bio { get; set; }

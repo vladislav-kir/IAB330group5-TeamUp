@@ -3,13 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:TeamUp.ViewModels"
              mc:Ignorable="d"
              x:Class="TeamUp.Views.LoginPage">
 
-    <ContentPage.BindingContext>
-        <vm:LoginViewModel/>
-    </ContentPage.BindingContext>
 
     <StackLayout>
         <Label Text="Welcome to TeamUp!!!" 
@@ -19,7 +15,7 @@
         <Button Text="Login"
                 VerticalOptions="End"
                 HorizontalOptions="Center" 
-                Command="{Binding LoginCommand}"/>
+                Clicked="LoginButton_Clicked"/>
         
     </StackLayout>
 

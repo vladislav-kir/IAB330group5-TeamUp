@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TeamUp.Views.UserDetailsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Name & Bio Section -->
+            <StackLayout>
+                <Label 
+                    x:Name="name"
+                    Text="name"
+                    HorizontalOptions="CenterAndExpand" />
+
+                <Label 
+                    x:Name="bio"
+                    Text="bio"
+                    HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+
+            <!-- Profile section -->
+            <Frame >
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label 
+                            Text="Age:"
+                            FontSize="Medium"
+                            TextColor="Black"/>
+
+                        <Label 
+                            x:Name="age"
+                            Text="age"
+                            HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+                    <Label Text="Playing:" />
+                
+                    <!-- This place is for Sport Playing - Dynamic Item will be generated -->
+                
+                </StackLayout>
+            </Frame>
+
+            <Frame>
+                <StackLayout>
+                    <Label Text="Contact"/>
+                
+                    <StackLayout Orientation="Horizontal">
+                        <Label 
+                            Text="Phone:" />
+
+                        <Label 
+                            x:Name="phone"
+                            Text="phone"
+                            HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label 
+                            Text="Email:" />
+
+                        <Label 
+                            x:Name="email"
+                            Text="email"
+                            HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+        
+    </ContentPage.Content>
+</ContentPage>

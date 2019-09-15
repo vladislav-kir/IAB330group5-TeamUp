@@ -35,6 +35,12 @@ namespace TeamUp.Views
             usersListView.ItemsSource = usersList;
         }
 
-      
+        private async void UsersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var user = await userViewModel.GetUserByName(e.SelectedItem.ToString());
+
+            await Navigation.PushAsync(new UserDetailsPage(user));
+        }
+
     }
 }

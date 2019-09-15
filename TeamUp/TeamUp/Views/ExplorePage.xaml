@@ -5,13 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TeamUp.Views.ExplorePage">
+    
+    
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Explore page!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <ListView x:Name="usersListView">
+            <ListView x:Name="usersListView" ItemSelected="UsersListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding name}"></TextCell>

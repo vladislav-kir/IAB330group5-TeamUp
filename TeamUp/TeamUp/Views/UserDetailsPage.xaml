@@ -9,32 +9,43 @@
         <StackLayout>
             <!-- Name & Bio Section -->
             <StackLayout>
+                <Image x:Name="avatarView"/>
                 <Label 
-                    x:Name="name"
+                    x:Name="nameView"
                     Text="name"
+                    FontSize="Large"
+                    TextColor="Black"
                     HorizontalOptions="CenterAndExpand" />
 
                 <Label 
-                    x:Name="bio"
+                    x:Name="bioView"
                     Text="bio"
+                    
                     HorizontalOptions="CenterAndExpand" />
             </StackLayout>
+            
+            
 
             <!-- Profile section -->
             <Frame >
                 <StackLayout>
+                    <Label 
+                            Text="Profile"
+                            TextColor="Black"
+                            FontSize="Medium"/>
+                    
+                    <!-- Age -->
                     <StackLayout Orientation="Horizontal">
                         <Label 
-                            Text="Age:"
-                            FontSize="Medium"
-                            TextColor="Black"/>
+                            Text="Age:"/>
 
                         <Label 
-                            x:Name="age"
+                            x:Name="ageView"
                             Text="age"
                             HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
 
+                    <!-- Playing -->
                     <Label Text="Playing:" />
                 
                     <!-- This place is for Sport Playing - Dynamic Item will be generated -->
@@ -42,26 +53,32 @@
                 </StackLayout>
             </Frame>
 
+            <!-- Contact section -->
             <Frame>
                 <StackLayout>
-                    <Label Text="Contact"/>
-                
+                    <Label 
+                            Text="Contact"
+                            TextColor="Black"
+                            FontSize="Medium"/>
+                    
+                    <!-- Phone -->
                     <StackLayout Orientation="Horizontal">
                         <Label 
                             Text="Phone:" />
 
                         <Label 
-                            x:Name="phone"
+                            x:Name="phoneView"
                             Text="phone"
                             HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
 
+                    <!-- Email -->
                     <StackLayout Orientation="Horizontal">
                         <Label 
                             Text="Email:" />
 
                         <Label 
-                            x:Name="email"
+                            x:Name="emailView"
                             Text="email"
                             HorizontalOptions="CenterAndExpand" />
                     </StackLayout>

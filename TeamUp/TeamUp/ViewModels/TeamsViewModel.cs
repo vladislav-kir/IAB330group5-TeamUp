@@ -28,7 +28,7 @@ namespace TeamUp.ViewModels
             var query = await CrossCloudFirestore.Current
                                         .Instance
                                         .GetCollection("Team")
-                                        .WhereEqualsTo("TeamName", name)
+                                        .WhereEqualsTo("name", name)
                                         .GetDocumentsAsync();
 
             var team = query.ToObjects<Team>().ToList().First();

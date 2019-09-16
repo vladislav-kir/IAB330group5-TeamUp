@@ -12,6 +12,11 @@ namespace TeamUp.Models
         public string bio { get; set; }
         public List<String> member { get; set; }
         public List<String> member_request { get; set; }
-         public string team_leader { get; set; }
+        public string team_leader { get; set; }
+
+        public override string ToString()
+        {
+            return this.name;
+        }
     }
 }

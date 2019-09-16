@@ -14,7 +14,7 @@ namespace TeamUp.Views
     public partial class MyTeamsPage : ContentPage
     {
 
-        TeamsViewModel MyTeamsViewModel = new TeamsViewModel();
+        TeamsViewModel teamsViewModel = new TeamsViewModel();
         public MyTeamsPage()
         {
             InitializeComponent();
@@ -25,10 +25,17 @@ namespace TeamUp.Views
         {
             base.OnAppearing();
 
-            var usersList = await MyTeamsViewModel.GetAllTeams();
+            var teamsList = await teamsViewModel.GetAllTeams();
 
 
-            myTeamsListView.ItemsSource = usersList;
+            myTeamsListView.ItemsSource = teamsList;
+        }
+
+        private async void TeamsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var team = await teamsViewModel.GetTeamByName(e.SelectedItem.ToString());
+
+            await Navigation.PushAsync(new TeamDetailsPage(team));
         }
     }
 }

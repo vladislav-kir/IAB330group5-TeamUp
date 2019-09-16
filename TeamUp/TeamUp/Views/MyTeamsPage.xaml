@@ -10,7 +10,7 @@
             <Label Text="Welcome to Your teams!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <ListView x:Name="myTeamsListView">
+            <ListView x:Name="myTeamsListView" ItemSelected="TeamsListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding name}"></TextCell>

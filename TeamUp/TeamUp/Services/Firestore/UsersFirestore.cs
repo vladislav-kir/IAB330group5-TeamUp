@@ -7,7 +7,7 @@ using TeamUp.Models;
 using System.Linq;
 using Firebase.Storage;
 
-namespace TeamUp.ViewModels
+namespace TeamUp.Services.Firestore
 {
     public class UsersFirestore
     {

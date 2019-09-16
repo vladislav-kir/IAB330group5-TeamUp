@@ -8,6 +8,7 @@ using Xamarin.Forms.Xaml;
 using TeamUp.Models;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using TeamUp.Services.Firestore;
 
 namespace TeamUp.ViewModels
 {

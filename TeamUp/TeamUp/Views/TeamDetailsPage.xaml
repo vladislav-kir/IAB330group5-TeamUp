@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="{Binding Title}"
              x:Class="TeamUp.Views.TeamDetailsPage">
     <ContentPage.Content>
         <StackLayout>
@@ -11,14 +12,14 @@
             <StackLayout>
                 <Label 
                     x:Name="nameView"
-                    Text="name"
+                    Text="{Binding team.name}"
                     FontSize="Large"
                     TextColor="Black"
                     HorizontalOptions="CenterAndExpand" />
 
                 <Label 
                     x:Name="bioView"
-                    Text="bio"
+                    Text="{Binding team.bio}"
                     
                     HorizontalOptions="CenterAndExpand" />
             </StackLayout>

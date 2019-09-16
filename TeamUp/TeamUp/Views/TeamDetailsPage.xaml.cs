@@ -14,20 +14,17 @@ namespace TeamUp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TeamDetailsPage : ContentPage
     {
-        private Team team;
-        private TeamsViewModel teamViewModel = new TeamsViewModel();
-
-        public TeamDetailsPage(Team team)
+        TeamDetailsPageViewModel teamDetailsPageViewModel;
+        public TeamDetailsPage(TeamDetailsPageViewModel teamDetailsPageViewModel)
         {
             InitializeComponent();
-            this.team = team;
+            BindingContext = this.teamDetailsPageViewModel = teamDetailsPageViewModel;
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            nameView.Text = team.name;
-            bioView.Text = team.bio;
+            
         }
     }
 }

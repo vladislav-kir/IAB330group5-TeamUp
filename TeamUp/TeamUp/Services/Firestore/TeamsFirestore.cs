@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using TeamUp.Models;
 using System.Linq;
 
-namespace TeamUp.ViewModels
+namespace TeamUp.Services.Firestore
 {
-    public class TeamsViewModel
+    public class TeamsFirestore
     {
-        public async Task<Team> GetTeamById(string id)
+        public static async Task<Team> GetTeamById(string id)
         {
             var document = await CrossCloudFirestore.Current
                                         .Instance
@@ -23,7 +23,7 @@ namespace TeamUp.ViewModels
             return team;
         }
 
-        public async Task<Team> GetTeamByName(string name)
+        public static async Task<Team> GetTeamByName(string name)
         {
             var query = await CrossCloudFirestore.Current
                                         .Instance
@@ -36,7 +36,7 @@ namespace TeamUp.ViewModels
             return team;
         }
 
-        public async Task<List<Team>> GetAllTeams()
+        public static async Task<List<Team>> GetAllTeams()
         {
             var query = await CrossCloudFirestore.Current
                                      .Instance

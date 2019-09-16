@@ -15,13 +15,12 @@ namespace TeamUp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExplorePage : ContentPage
     {
-        UserViewModel userViewModel = new UserViewModel();
-
+        ExplorePageViewModel explorePageViewModel;
+        
         public ExplorePage()
         {
             InitializeComponent();
-            Title = "Explore";
-
+            BindingContext = explorePageViewModel = new ExplorePageViewModel();
         }
 
         /* On first load, on appearing of the page. This will load all the users on the database */
@@ -29,18 +28,22 @@ namespace TeamUp.Views
         {
             base.OnAppearing();
 
-            var usersList = await userViewModel.GetAllUsers();
-            
+            if (explorePageViewModel.usersList.Count == 0)
+                explorePageViewModel.LoadUsersCommand.Execute(null);
 
-            usersListView.ItemsSource = usersList;
         }
 
-        private async void UsersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async void OnUserSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var user = await userViewModel.GetUserByName(e.SelectedItem.ToString());
+            var user = args.SelectedItem as User;
 
-            await Navigation.PushAsync(new UserDetailsPage(user));
+            if (user == null)
+                return;
+
+            await Navigation.PushAsync(new UserDetailsPage(new UserDetailsPageViewModel(user)));
         }
+
+
 
     }
 }

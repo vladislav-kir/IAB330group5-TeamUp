@@ -9,17 +9,11 @@ using Firebase.Storage;
 
 namespace TeamUp.ViewModels
 {
-    public class UserViewModel
+    public class UsersFirestore
     {
-        FirebaseStorage firebaseStorage;
+        static FirebaseStorage firebaseStorage = new FirebaseStorage("teamup-b7a43.appspot.com");
 
-        public UserViewModel()
-        {
-            // Init connection to Firebase Storage
-            firebaseStorage = new FirebaseStorage("teamup-b7a43.appspot.com");
-        }
-
-        public async Task<String> GetUserAvatarURL(User user)
+        public static async Task<String> GetUserAvatarURLAsync(User user)
         {
             return await firebaseStorage
                 .Child("images")
@@ -33,7 +27,7 @@ namespace TeamUp.ViewModels
          Get Specific User based on its ID.
          Please go to Firestore database to look it up
          */
-        public async Task<User> GetUserById(string id)
+        public static async Task<User> GetUserByIdAsync(string id)
         {
             //Load document from Cloud Firestore
             var document = await CrossCloudFirestore.Current
@@ -46,7 +40,7 @@ namespace TeamUp.ViewModels
             var user = document.ToObject<User>();
 
             // Download avatar image
-            user.avatar = await GetUserAvatarURL(user);
+            user.avatar = await GetUserAvatarURLAsync(user);
 
             return user;
         }
@@ -55,7 +49,7 @@ namespace TeamUp.ViewModels
          Get Specific User based on its Name.
          Please go to Firestore database to look it up
          */
-        public async Task<User> GetUserByName(string name)
+        public static async Task<User> GetUserByNameAsync(string name)
         {
             //Load document from Cloud Firestore
             var query = await CrossCloudFirestore.Current
@@ -68,7 +62,7 @@ namespace TeamUp.ViewModels
             var user = query.ToObjects<User>().ToList().First();
 
             // Download avatar image
-            user.avatar = await GetUserAvatarURL(user);
+            user.avatar = await GetUserAvatarURLAsync(user);
 
             return user;
         }
@@ -77,7 +71,7 @@ namespace TeamUp.ViewModels
         /*
          Get All of Users that are on the database
          */
-        public async Task<List<User>> GetAllUsers()
+        public static async Task<List<User>> GetAllUsersAsync()
         {
             // Load all documents from Cloud Firestore
             var query = await CrossCloudFirestore.Current
@@ -91,7 +85,7 @@ namespace TeamUp.ViewModels
             // Download avatar image for each User in the UserList
             UsersList.ForEach(async user =>
             {
-                user.avatar = await GetUserAvatarURL(user);
+                user.avatar = await GetUserAvatarURLAsync(user);
             });
 
             return UsersList;

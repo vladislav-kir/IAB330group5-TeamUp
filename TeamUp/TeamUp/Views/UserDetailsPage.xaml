@@ -4,22 +4,24 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="{Binding Title}"
              x:Class="TeamUp.Views.UserDetailsPage">
+            
     <ContentPage.Content>
         <StackLayout>
             <!-- Name & Bio Section -->
             <StackLayout>
-                <Image x:Name="avatarView"/>
+                <Image x:Name="avatarView" Source="{Binding user.avatar}"/>
                 <Label 
                     x:Name="nameView"
-                    Text="name"
+                    Text="{Binding user.name}"
                     FontSize="Large"
                     TextColor="Black"
                     HorizontalOptions="CenterAndExpand" />
 
                 <Label 
                     x:Name="bioView"
-                    Text="bio"
+                    Text="{Binding user.bio}"
                     
                     HorizontalOptions="CenterAndExpand" />
             </StackLayout>
@@ -41,7 +43,7 @@
 
                         <Label 
                             x:Name="ageView"
-                            Text="age"
+                            Text="{Binding user.age}"
                             HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
 
@@ -68,7 +70,7 @@
 
                         <Label 
                             x:Name="phoneView"
-                            Text="phone"
+                            Text="{Binding user.phone}"
                             HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
 
@@ -79,7 +81,7 @@
 
                         <Label 
                             x:Name="emailView"
-                            Text="email"
+                            Text="{Binding user.email}"
                             HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
                 </StackLayout>

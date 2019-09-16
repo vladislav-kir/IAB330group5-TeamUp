@@ -14,25 +14,19 @@ namespace TeamUp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserDetailsPage : ContentPage
     {
-        private User user;
-        private UserViewModel userViewModel = new UserViewModel();
+        UserDetailsPageViewModel userDetailsPageViewModel;
 
-        public UserDetailsPage(User user)
+        public UserDetailsPage(UserDetailsPageViewModel userDetailsPageViewModel)
         {
             InitializeComponent();
-            this.user = user;
+            BindingContext = this.userDetailsPageViewModel = userDetailsPageViewModel;
+
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            avatarView.Source = user.avatar;
-            nameView.Text = user.name;
-            phoneView.Text = user.phone;
-            emailView.Text = user.email;
-            ageView.Text = user.age.ToString();
-            bioView.Text = user.bio;
         }
     }
 }

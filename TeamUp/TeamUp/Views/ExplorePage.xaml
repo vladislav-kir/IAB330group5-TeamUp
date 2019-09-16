@@ -4,8 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="{Binding Title}"
              x:Class="TeamUp.Views.ExplorePage">
-    
+
     
     <ContentPage.Content>
         <StackLayout>
@@ -13,10 +14,18 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <ListView x:Name="usersListView" ItemSelected="UsersListView_ItemSelected">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+            <ListView x:Name="usersListView" 
+                      ItemsSource="{Binding usersList}"
+                      ItemSelected="OnUserSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding name}"></TextCell>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Image Source="{Binding avatar}"></Image>
+                                <Label Text="{Binding name}"></Label>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

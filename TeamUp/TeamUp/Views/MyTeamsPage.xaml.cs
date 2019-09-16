@@ -25,10 +25,10 @@ namespace TeamUp.Views
         {
             base.OnAppearing();
 
-            var usersList = await MyTeamsViewModel.GetAllTeams();
+            var teamsList = await MyTeamsViewModel.GetAllTeams();
 
 
-            myTeamsListView.ItemsSource = usersList;
+            myTeamsListView.ItemsSource = teamsList;
         }
     }
 }

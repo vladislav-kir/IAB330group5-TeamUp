@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TeamUp.Views
+namespace TeamUp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExploreUserPage : ContentPage
+    public partial class AppBase : Xamarin.Forms.Shell
     {
-        public ExploreUserPage()
+        public AppBase()
         {
             InitializeComponent();
+            
         }
+
+        
     }
 }

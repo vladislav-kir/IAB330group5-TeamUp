@@ -12,12 +12,12 @@ using TeamUp.Services.Firestore;
 
 namespace TeamUp.ViewModels
 {
-    class ExplorePageViewModel : BaseViewModel
+    class ExploreUsersViewViewModel : BaseViewModel
     {
         public ObservableCollection<User> usersList { get; set; }
         public Command LoadUsersCommand { get; set; }
 
-        public ExplorePageViewModel()
+        public ExploreUsersViewViewModel()
         {
             Title = "Explore";
 
@@ -40,6 +40,10 @@ namespace TeamUp.ViewModels
                 foreach (var user in users)
                 {
                     usersList.Add(user);
+                    Debug.WriteLine("------------USER-------------");
+                    Debug.WriteLine("**** name: " + user.name);
+                    Debug.WriteLine("****  age: " + user.age);
+
                 }
             }
             catch (Exception ex)

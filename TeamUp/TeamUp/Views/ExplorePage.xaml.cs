@@ -3,46 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TeamUp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using TeamUp.ViewModels;
-using Plugin.CloudFirestore;
-using TeamUp.Models;
 
 namespace TeamUp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExplorePage : ContentPage
     {
-        ExplorePageViewModel explorePageViewModel;
-        
         public ExplorePage()
         {
             InitializeComponent();
-            BindingContext = explorePageViewModel = new ExplorePageViewModel();
         }
 
-        /* On first load, on appearing of the page. This will load all the users on the database */
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
+            Title = "Explore";
 
-            if (explorePageViewModel.usersList.Count == 0)
-                explorePageViewModel.LoadUsersCommand.Execute(null);
-
+            exploreUsersView.IsVisible = true;
+            userButton.IsEnabled = false;
+            exploreTeamsView.IsVisible = false;
+            teamButton.IsEnabled = true;
         }
 
-        async void OnUserSelected(object sender, SelectedItemChangedEventArgs args)
+        private void User_Clicked(object sender, EventArgs e)
         {
-            var user = args.SelectedItem as User;
-
-            if (user == null)
-                return;
-
-            await Navigation.PushAsync(new UserDetailsPage(new UserDetailsPageViewModel(user)));
+            exploreUsersView.IsVisible = true;
+            userButton.IsEnabled = false;
+            exploreTeamsView.IsVisible = false;
+            teamButton.IsEnabled = true;
         }
 
+        private void Team_Clicked(object sender, EventArgs e)
+        {
+            exploreTeamsView.IsVisible = true;
+            teamButton.IsEnabled = false;
+            exploreUsersView.IsVisible = false;
+            userButton.IsEnabled = true;
+        }
 
 
     }

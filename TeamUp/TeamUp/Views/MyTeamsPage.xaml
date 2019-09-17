@@ -4,33 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Title="{Binding Title}"
              x:Class="TeamUp.Views.MyTeamsPage">
-    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Your teams!"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand" />
-       
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
-            
-            <ListView x:Name="teamsListView" 
-                          ItemsSource="{Binding teamsList}"
-                          ItemSelected="OnTeamSelected">
-            
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10">
-                                <Image Source="{Binding avatar}"></Image>
-                                <Label Text="{Binding name}"></Label>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

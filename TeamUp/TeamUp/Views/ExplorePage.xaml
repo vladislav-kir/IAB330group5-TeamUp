@@ -4,34 +4,24 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Title="{Binding Title}"
+             xmlns:views="clr-namespace:TeamUp.Views.ExploreComponent"
+             xmlns:vm="clr-namespace:TeamUp.ViewModels"
              x:Class="TeamUp.Views.ExplorePage">
-
+    
+    <ContentPage.BindingContext>
+        <vm:ExploreViewModel x:Name="Parent"/>
+    </ContentPage.BindingContext>
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Explore page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
-            <ListView x:Name="usersListView" 
-                      ItemsSource="{Binding usersList}"
-                      ItemSelected="OnUserSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10">
-                                <Image Source="{Binding avatar}"></Image>
-                                <Label Text="{Binding name}"></Label>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="userButton" Text="User" Clicked="User_Clicked"/>
+                <Button x:Name="teamButton" Text="Team" Clicked="Team_Clicked"/>
+            </StackLayout>
             
+
+            <views:ExploreUsersView x:Name="exploreUsersView" />
+            <views:ExploreTeamsView x:Name="exploreTeamsView" />
         </StackLayout>
-        
-        
     </ContentPage.Content>
 </ContentPage>

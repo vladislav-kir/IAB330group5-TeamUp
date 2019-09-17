@@ -11,12 +11,12 @@ using TeamUp.Services.Firestore;
 
 namespace TeamUp.ViewModels
 {
-    public class MyTeamsPageViewModel: BaseViewModel
+    public class ExploreTeamsViewViewModel: BaseViewModel
     {
         public ObservableCollection<Team> teamsList { get; set; }
         public Command LoadTeamsCommand { get; set; }
 
-        public MyTeamsPageViewModel()
+        public ExploreTeamsViewViewModel()
         {
             Title = "My Team";
 

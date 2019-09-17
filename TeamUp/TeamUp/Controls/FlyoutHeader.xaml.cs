@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TeamUp.Views
+namespace TeamUp.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExploreTeamPage : ContentPage
+    public partial class FlyoutHeader : ContentView
     {
-        public ExploreTeamPage()
+        public FlyoutHeader()
         {
             InitializeComponent();
         }

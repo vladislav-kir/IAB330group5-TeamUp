@@ -6,14 +6,43 @@ using TeamUp.Views;
 using Xamarin.Forms;
 using System.Windows;
 using TeamUp.Models;
+using TeamUp.Services.Firestore;
 
 namespace TeamUp.ViewModels
 {
     public class LoginPageViewModel :BaseViewModel
     {
-        
+        private string email;
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
 
-        public Command LoginCommand
+            set
+            {
+                email = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string password;
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Command LoginFacebookCommand
         {
             get
             {
@@ -24,6 +53,30 @@ namespace TeamUp.ViewModels
             }
         }
 
-        
+        public Command LoginCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    try
+                    {
+                        string uid = await AuthenticationFirebase.AuthenticateEmailPasswordAsync(Email, Password);
+                        UsersFirestore.userUID = uid;
+
+                        User user = await UsersFirestore.GetMyProfileAsync();
+
+                        await App.Current.MainPage.Navigation.PushModalAsync(new EmailPasswordLogInPage(new EmailPasswordLogInPageViewModel(user)));
+                    }
+                    catch
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Authentication Failed", "Wrong Email or Password", "Cancel");
+                    }
+                    
+                });
+            }
+        }
+
+
     }
 }

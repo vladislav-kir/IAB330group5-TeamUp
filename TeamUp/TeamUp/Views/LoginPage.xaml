@@ -10,13 +10,26 @@
 
     <StackLayout>
         <Label Text="Welcome to TeamUp!!!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+           HorizontalOptions="Center" />
 
-        <Button Text="Login with Facebook"
+        <Label Text="Email" />
+        <Entry Placeholder="Your email" Text="{Binding Email}"/>
+
+        <Label Text="Password" />
+        <Entry IsPassword="True" Placeholder="Your password" Text="{Binding Password}"/>
+        
+        <Button Text="Login"
                 VerticalOptions="End"
                 HorizontalOptions="Center" 
                 Command="{Binding LoginCommand}"
+               />
+        
+        <Button Text="Login with Facebook"
+                VerticalOptions="End"
+                HorizontalOptions="Center" 
+                Command="{Binding LoginFacebookCommand}"
+                BackgroundColor="Cyan"
+                TextColor="White"
                />
         
     </StackLayout>

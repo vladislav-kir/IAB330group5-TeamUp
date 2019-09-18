@@ -11,60 +11,58 @@
         <vm:TeamDetailsPageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <!--{Binding name}-->
-            <Label 
-                    x:Name="nameView"
-                    Text="Brisbane Broncos" 
-                    FontSize="Large"
+        <ScrollView>
+            <StackLayout>
+                <!--{Binding Team.name}-->
+                <Label 
+                        x:Name="nameView"
+                        Text="{Binding Team.name}" 
+                        FontSize="Large"
+                        TextColor="Black"
+                        HorizontalOptions="Center"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="20"
+                        />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--{Binding Team.sport}-->
+                    <Label 
+                        x:Name="sportView"
+                        Text="{Binding Team.sport}"
+                        Grid.Row="0"
+                        Grid.Column="0" 
+                        Margin="20, 0, 0, 0" />
+
+                    <!--{Binding Team.location}-->
+                    <Label 
+                        x:Name="sportView"
+                        Text="{Binding Team.location}"
+                        Grid.Row="0"
+                        Grid.Column="1" 
+                        Margin="0, 0, 0, 0" />
+                </Grid>
+
+                <!--{Binding Team.bio}-->
+                <Label 
+                    x:Name="bioView"
                     TextColor="Black"
-                    HorizontalOptions="Center"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="20"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Team.bio}"
+                    Margin="20, -10, 20, 0" 
                     />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
 
-                <!--{Binding sport}-->
-                <Label 
-                    x:Name="sportView"
-                    Text="Sport: Football"
-                    Grid.Row="0"
-                    Grid.Column="0" 
-                    Margin="20, 0, 0, 0" />
-
-                <!--{Binding location}-->
-                <Label 
-                    x:Name="sportView"
-                    Text="Local: Greenslopes"
-                    Grid.Row="0"
-                    Grid.Column="1" 
-                    Margin="0, 0, 0, 0" />
-            </Grid>
-            
-            <!--{Binding bio}-->
-            <Label 
-                x:Name="bioView"
-                TextColor="Black"
-                HorizontalTextAlignment="Center"
-                Text="Pea horseradish azuki bean lettuce avocado asparagus okra. Kohlrabi radish okra azuki bean corn fava bean mustard tigernut jícama green bean celtuce collard greens avocado quandong fennel gumbo black-eyed pea. Grape silver beet watercress potato tigernut corn groundnut. Chickweed okra pea winter purslane coriander yarrow sweet pepper radish garlic brussels sprout."
-                Margin="20, -10, 20, 0" 
-                />
-
-            <!--{Binding teamLeader}-->
-            <Label 
-                x:Name="leaderView"
-                Text="yolo"
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+                <!-- Add member list here -->
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

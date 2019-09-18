@@ -23,7 +23,6 @@
                 <Button x:Name="teamButton" Text="Team" Clicked="Team_Clicked"/>
             </StackLayout>
             
-
             <views:ExploreUsersView x:Name="exploreUsersView" />
             <views:ExploreTeamsView x:Name="exploreTeamsView" />
         </StackLayout>

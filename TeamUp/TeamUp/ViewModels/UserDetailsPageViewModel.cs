@@ -10,6 +10,7 @@ namespace TeamUp.ViewModels
     {
         public User user { get; set; }
 
+        public UserDetailsPageViewModel() { }
         public UserDetailsPageViewModel(User user = null)
         {
             Title = user?.name;

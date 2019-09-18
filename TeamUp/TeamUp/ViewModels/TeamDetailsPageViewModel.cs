@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using TeamUp.Models;
 using Xamarin.Forms;
@@ -16,7 +17,5 @@ namespace TeamUp.ViewModels
             Title = team?.name;
             Team = team;
         }
-
-        
     }
 }

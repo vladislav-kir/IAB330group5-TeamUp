@@ -6,6 +6,7 @@ namespace TeamUp.Models
 {
     public class User
     {
+        public string uid { get; set; }
         public int age { get; set; }
         public string bio { get; set; }
         public string email { get; set; }

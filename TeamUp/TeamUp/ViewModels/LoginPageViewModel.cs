@@ -5,11 +5,11 @@ using System.Text;
 using TeamUp.Views;
 using Xamarin.Forms;
 using System.Windows;
-
+using TeamUp.Models;
 
 namespace TeamUp.ViewModels
 {
-    class LoginPageViewModel :BaseViewModel
+    public class LoginPageViewModel :BaseViewModel
     {
         
 
@@ -17,9 +17,9 @@ namespace TeamUp.ViewModels
         {
             get
             {
-                return new Command( () =>
+                return new Command( async () =>
                 {
-                    App.Current.MainPage = new FacebookLogInPage();
+                    await App.Current.MainPage.Navigation.PushModalAsync(new FacebookLogInPage());
                 });
             }
         }

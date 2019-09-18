@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TeamUp.Models
 {
-    class FacebookProfileModel
+    public class FacebookProfile
     {
         public string Name { get; set; }
         public Picture Picture { get; set; }

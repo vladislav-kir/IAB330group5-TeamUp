@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamUp.ViewModels;
 using Xamarin.Forms;
 
 namespace TeamUp.Views
@@ -13,9 +14,12 @@ namespace TeamUp.Views
     [DesignTimeVisible(false)]
     public partial class LoginPage : ContentPage
     {
+        LoginPageViewModel loginPageViewModel;
         public LoginPage()
         {
             InitializeComponent();
+
+            BindingContext = loginPageViewModel = new LoginPageViewModel();
         }
 
 

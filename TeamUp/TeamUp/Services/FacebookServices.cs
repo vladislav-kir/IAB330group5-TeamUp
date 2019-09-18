@@ -9,7 +9,7 @@ namespace TeamUp.Services
 {
     class FacebookServices
     {
-        public async Task<FacebookProfileModel> GetFacebookProfileAsync(string accessToken)
+        public async Task<FacebookProfile> GetFacebookProfileAsync(string accessToken)
         {
             var requestUrl =
                 "https://graph.facebook.com/v2.7/me/?fields=name,picture,email&access_token="
@@ -21,7 +21,7 @@ namespace TeamUp.Services
 
             Console.WriteLine("-------------- JSON ------------");
             Console.WriteLine("--------------------" + userJson);
-            var facebookProfile = JsonConvert.DeserializeObject<FacebookProfileModel>(userJson);
+            var facebookProfile = JsonConvert.DeserializeObject<FacebookProfile>(userJson);
 
             return facebookProfile;
         }

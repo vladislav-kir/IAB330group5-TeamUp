@@ -15,25 +15,32 @@ namespace TeamUp.Services.Firestore
 
         public static async Task<String> GetUserAvatarURLAsync(User user)
         {
-            return await firebaseStorage
-                .Child("images")
-                .Child("user")
-                .Child(user.name)
-                .Child(user.avatar)
-                .GetDownloadUrlAsync();
+            //If the image is not a URL (it is stored on the cloud)
+            if(!user.avatar.StartsWith("https://"))
+                //Then fetch the image
+                return await firebaseStorage
+                    .Child("images")
+                    .Child("user")
+                    .Child(user.name)
+                    .Child(user.avatar)
+                    .GetDownloadUrlAsync();
+
+            // Else return the original avatar URL
+            return user.avatar;
         }
+
 
         /*
          Get Specific User based on its ID.
          Please go to Firestore database to look it up
          */
-        public static async Task<User> GetUserByIdAsync(string id)
+        public static async Task<User> GetMyProfileAsync(string uid)
         {
             //Load document from Cloud Firestore
             var document = await CrossCloudFirestore.Current
                                         .Instance
                                         .GetCollection("User")
-                                        .GetDocument(id)
+                                        .GetDocument(uid)
                                         .GetDocumentAsync();
 
             // Convert Document to User Model
@@ -73,6 +80,7 @@ namespace TeamUp.Services.Firestore
          */
         public static async Task<List<User>> GetAllUsersAsync()
         {
+            
             // Load all documents from Cloud Firestore
             var query = await CrossCloudFirestore.Current
                                      .Instance
@@ -89,6 +97,35 @@ namespace TeamUp.Services.Firestore
             });
 
             return UsersList;
+        }
+
+        public static async Task<bool> IsNewUser(string uid)
+        {
+            //Firstly Look up, whether there exists user
+            var document = await CrossCloudFirestore.Current
+                                        .Instance
+                                        .GetCollection("User")
+                                        .GetDocument(uid)
+                                        .GetDocumentAsync();
+           
+            return !document.Exists;
+        }
+
+
+        /*
+         Add a new User to our Firestore Database
+         */
+        public static async Task AddUserAsync(User user)
+        {
+            
+            //Check if this user is new ??
+            if (await IsNewUser(user.uid))
+                await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("User")
+                         .GetDocument(user.uid)
+                         .SetDataAsync(user);
+
         }
 
         

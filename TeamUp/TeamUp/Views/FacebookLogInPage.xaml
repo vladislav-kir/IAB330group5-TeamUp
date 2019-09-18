@@ -15,32 +15,52 @@
         <StackLayout x:Name="MainStackLayout"
                Padding="8,30">
 
-            <StackLayout Orientation="Horizontal"
-                 Padding="0,20,0,50">
+            <!-- At first, we don't get it Visible, If user is Not NEW, we display this-->
+            <StackLayout x:Name="WelcomeView" IsVisible="False">
+                <Label FontSize="Large" Text="Welcome Back" HorizontalOptions="CenterAndExpand"/>
 
                 <Image Source="{Binding FacebookProfile.Picture.Data.Url}"
-             HeightRequest="100"
-             WidthRequest="100"
-             VerticalOptions="Start"/>
+                 HeightRequest="300"
+                 WidthRequest="300"
+                 VerticalOptions="Start"
+                HorizontalOptions="CenterAndExpand"/>
 
-                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Vertical">
 
-                    <Label Text="{Binding FacebookProfile.Name, StringFormat='Name: {0:N}'}"
-               TextColor="Black"
-               Font="Bold"
-               FontSize="22"/>
+                        <Label Text="{Binding FacebookProfile.Name}"
+                   TextColor="Black"
+                   Font="Bold"
+                   FontSize="22"
+                   HorizontalOptions="CenterAndExpand"/>
 
-                    <Label Text="{Binding FacebookProfile.Email, StringFormat='Name: {0:N}'}"
-               TextColor="Black"
-               Font="Bold"
-               FontSize="22"/>
 
-                </StackLayout>
+                    </StackLayout>
+
+                <Button Text="Continue" Command="{Binding GoToMainPage}" />
 
             </StackLayout>
 
-            <Button Command="{Binding LogOutCommand}" />
+            <StackLayout x:Name="RegisterView" IsVisible="False">
+                <Label Text="Welcome to Team Up"/>
+                <Label Text="Please provide us these details for the first use"/>
 
+                <Label Text="Age" />
+                <Entry Text="{Binding User.age}" Placeholder="Your age"/>
+
+                <Label Text="Bio" />
+                <Entry Text="{Binding User.bio}" Placeholder="Your description"/>
+                
+                <Label Text="Phone number" />
+                <Entry Text="{Binding User.phone}" Placeholder="Your phone number"/>
+                
+                <Label Text="Email" />
+                <Entry Text="{Binding User.email}" Placeholder="Email"/>
+
+                <Button Text="Continue" Command="{Binding AddUserToCloud}" />
+
+            </StackLayout>
+            
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

@@ -12,6 +12,10 @@
         <vm:ExploreViewModel x:Name="Parent"/>
     </ContentPage.BindingContext>
     
+    <Shell.TitleView>
+        <Button Text="Log out" Command="{Binding LogOutCommand}"/>
+    </Shell.TitleView>
+    
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">

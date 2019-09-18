@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ExploreComponent\ExploreUsersView.xaml.cs">
+    <Compile Update="Views\ExploreComponent\User\ExploreUsersView.xaml.cs">
       <DependentUpon>ExploreUsersView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LoginPage.xaml.cs">
@@ -40,16 +40,19 @@
     <EmbeddedResource Update="Controls\FlyoutHeader.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ExploreComponent\ExploreTeamsView.xaml">
+    <EmbeddedResource Update="Views\Authentication\EmailPasswordLogInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ExploreComponent\ExploreUsersView.xaml">
+    <EmbeddedResource Update="Views\ExploreComponent\Team\ExploreTeamsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ExploreComponent\User\ExploreUsersView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ExplorePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\FacebookLogInPage.xaml">
+    <EmbeddedResource Update="Views\Authentication\FacebookLogInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MyTeamsPage.xaml">
@@ -61,10 +64,10 @@
     <EmbeddedResource Update="Views\ProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TeamDetailsPage.xaml">
+    <EmbeddedResource Update="Views\ExploreComponent\Team\TeamDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UserDetailsPage.xaml">
+    <EmbeddedResource Update="Views\ExploreComponent\User\UserDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

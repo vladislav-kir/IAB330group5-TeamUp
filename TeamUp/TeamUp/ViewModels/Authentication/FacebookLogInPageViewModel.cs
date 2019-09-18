@@ -58,7 +58,7 @@ namespace TeamUp.ViewModels
         public void FirstUserInit(string uid)
         {
             User = new User { name = facebookProfile.Name, avatar = facebookProfile.Picture.Data.Url };
-            User.uid = uid;
+            //User.uid = uid;
         }
 
 

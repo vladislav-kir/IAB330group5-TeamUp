@@ -23,5 +23,29 @@ namespace TeamUp.Services.Firestore
             // Get user UID
             return result.User.Uid;
         }
+
+        /*
+         * Function for Authenticate User with Email & Password  
+         */
+        public async static Task<string> AuthenticateEmailPasswordAsync(string email, string password)
+        {
+            // Send to the server and get back the result
+            var result = await CrossFirebaseAuth.Current.Instance.SignInWithEmailAndPasswordAsync(email, password);
+
+            // Get user UID
+            return result.User.Uid;
+        }
+
+        /*
+         * Function for Register User with Email & Password  
+         */
+        public async static Task<string> SignUpEmailPasswordAsync(string email, string password)
+        {
+            // Send to the server and get back the result
+            var result = await CrossFirebaseAuth.Current.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
+
+            // Get user UID
+            return result.User.Uid;
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace TeamUp.ViewModels
             try
             {
                 teamsList.Clear();
-                var teams = await TeamsFirestore.GetAllTeams();
+                var teams = await TeamsFirestore.GetAllTeamsAsync();
                 foreach (var team in teams)
                 {
                     teamsList.Add(team);

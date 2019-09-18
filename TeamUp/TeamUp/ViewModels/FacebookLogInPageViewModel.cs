@@ -7,14 +7,26 @@ using TeamUp.Models;
 using TeamUp.Services;
 using Xamarin.Forms;
 using TeamUp.Services;
+using TeamUp.Services.Firestore;
 
 namespace TeamUp.ViewModels
 {
     
     class FacebookLogInPageViewModel : BaseViewModel
     {
-        private FacebookProfileModel facebookProfile;
-        public FacebookProfileModel FacebookProfile
+        private User user;
+        public User User
+        {
+            get { return user; }
+            set
+            {
+                user = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private FacebookProfile facebookProfile;
+        public FacebookProfile FacebookProfile
         {
             get { return facebookProfile; }
             set
@@ -28,17 +40,40 @@ namespace TeamUp.ViewModels
             var facebookServices = new FacebookServices();
 
             FacebookProfile = await facebookServices.GetFacebookProfileAsync(accessToken);
+
+            
         }
 
-        public Command LogOutCommand
+        public Command GoToMainPage
         {
             get
             {
                 return new Command(() =>
                 {
-                    DependencyService.Get<IClearCookies>().ClearAllCookies();
+                   App.Current.MainPage = new AppBase();
                 });
             }
         }
-    }
+
+        public void FirstUserInit(string uid)
+        {
+            User = new User { name = facebookProfile.Name, avatar = facebookProfile.Picture.Data.Url };
+            User.uid = uid;
+        }
+
+
+        public Command AddUserToCloud
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await UsersFirestore.AddUserAsync(user);
+                    App.Current.MainPage = new AppBase();
+                });
+            }
+        }
+        
+           
+        }
 }

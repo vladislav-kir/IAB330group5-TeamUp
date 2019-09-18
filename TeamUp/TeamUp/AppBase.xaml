@@ -5,7 +5,6 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:local="clr-namespace:TeamUp.Views"
-       xmlns:controls="clr-namespace:TeamUp.Controls"
        Title="AppBase"
        x:Class="TeamUp.AppBase">
 
@@ -32,7 +31,8 @@
 
     <!-- https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/shell/flyout -->
     <!--Flyout Header under Controls -->
-
+    
+    
 
     <TabBar>
         <Tab Title="My Team" Icon="tab_feed.png" TabIndex="1">

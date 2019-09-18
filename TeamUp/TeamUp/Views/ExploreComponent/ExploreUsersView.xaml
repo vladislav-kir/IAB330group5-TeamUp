@@ -17,7 +17,8 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10">
-                                <Image Source="{Binding avatar}"></Image>
+                                <!-- 
+                                <Image Source="{Binding avatar}"></Image>-->
                                 <Label Text="{Binding name}"></Label>
                             </StackLayout>
                         </ViewCell>

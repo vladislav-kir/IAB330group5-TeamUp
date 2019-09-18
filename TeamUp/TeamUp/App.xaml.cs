@@ -11,7 +11,7 @@ namespace TeamUp
         {
             InitializeComponent();
 
-            MainPage =  new LoginPage();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

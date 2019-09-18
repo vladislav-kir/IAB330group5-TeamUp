@@ -7,16 +7,13 @@
              xmlns:vm="clr-namespace:TeamUp.ViewModels"
              x:Class="TeamUp.Views.LoginPage">
 
-    <ContentPage.BindingContext>
-        <vm:LoginPageViewModel />
-    </ContentPage.BindingContext>
 
     <StackLayout>
         <Label Text="Welcome to TeamUp!!!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
 
-        <Button Text="Login"
+        <Button Text="Login with Facebook"
                 VerticalOptions="End"
                 HorizontalOptions="Center" 
                 Command="{Binding LoginCommand}"

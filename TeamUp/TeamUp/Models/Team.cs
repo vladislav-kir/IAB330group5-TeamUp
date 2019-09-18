@@ -11,8 +11,8 @@ namespace TeamUp.Models
         public string location { get; set; }
         public string bio { get; set; }
         public List<String> member { get; set; }
-        public List<String> member_request { get; set; }
-        public string team_leader { get; set; }
+        public List<String> memberRequest { get; set; }
+        public string teamLeader { get; set; }
 
         public override string ToString()
         {

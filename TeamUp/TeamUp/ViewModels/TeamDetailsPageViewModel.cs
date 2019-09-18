@@ -3,16 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TeamUp.Models;
+using Xamarin.Forms;
 
 namespace TeamUp.ViewModels
 {
-    public class TeamDetailsPageViewModel :BaseViewModel
+    public class TeamDetailsPageViewModel : BaseViewModel
     {
-        public Team team { get; set; }
+        public Team Team { get; set; }
+        public TeamDetailsPageViewModel() { }
         public TeamDetailsPageViewModel(Team team = null)
         {
             Title = team?.name;
-            this.team = team;
+            Team = team;
         }
+
+        
     }
 }

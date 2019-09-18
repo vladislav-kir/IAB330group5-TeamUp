@@ -60,6 +60,8 @@
                     Text="{Binding Team.bio}"
                     Margin="20, -10, 20, 0" 
                     />
+
+                <!-- Add member list here -->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

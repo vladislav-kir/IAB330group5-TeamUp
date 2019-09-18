@@ -17,7 +17,7 @@ namespace TeamUp.ViewModels
             get{
                 return new Command( async () =>
                 {
-                    //DependencyService.Get<IClearCookies>().ClearAllCookies();
+                    DependencyService.Get<IClearCookies>().ClearAllCookies();
                     await App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
                 });
             }

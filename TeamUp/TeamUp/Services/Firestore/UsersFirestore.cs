@@ -12,7 +12,7 @@ namespace TeamUp.Services.Firestore
     public class UsersFirestore
     {
         static FirebaseStorage firebaseStorage = new FirebaseStorage("teamup-b7a43.appspot.com");
-
+        public static string userUID { get; set; }
         public static async Task<String> GetUserAvatarURLAsync(User user)
         {
             //If the image is not a URL (it is stored on the cloud)
@@ -34,13 +34,13 @@ namespace TeamUp.Services.Firestore
          Get Specific User based on its ID.
          Please go to Firestore database to look it up
          */
-        public static async Task<User> GetMyProfileAsync(string uid)
+        public static async Task<User> GetMyProfileAsync()
         {
             //Load document from Cloud Firestore
             var document = await CrossCloudFirestore.Current
                                         .Instance
                                         .GetCollection("User")
-                                        .GetDocument(uid)
+                                        .GetDocument(userUID)
                                         .GetDocumentAsync();
 
             // Convert Document to User Model
@@ -99,13 +99,13 @@ namespace TeamUp.Services.Firestore
             return UsersList;
         }
 
-        public static async Task<bool> IsNewUser(string uid)
+        public static async Task<bool> IsNewUser()
         {
             //Firstly Look up, whether there exists user
             var document = await CrossCloudFirestore.Current
                                         .Instance
                                         .GetCollection("User")
-                                        .GetDocument(uid)
+                                        .GetDocument(userUID)
                                         .GetDocumentAsync();
            
             return !document.Exists;
@@ -119,11 +119,11 @@ namespace TeamUp.Services.Firestore
         {
             
             //Check if this user is new ??
-            if (await IsNewUser(user.uid))
+            if (await IsNewUser())
                 await CrossCloudFirestore.Current
                          .Instance
                          .GetCollection("User")
-                         .GetDocument(user.uid)
+                         .GetDocument(userUID)
                          .SetDataAsync(user);
 
         }

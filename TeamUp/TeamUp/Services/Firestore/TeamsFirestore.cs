@@ -65,12 +65,12 @@ namespace TeamUp.Services.Firestore
          * User must provide UID in order to have the information about their teams
          * 
          */
-        public static async Task<List<Team>> GetMyTeamsAsync(string uid)
+        public static async Task<List<Team>> GetMyTeamsAsync()
         {
             var document = await CrossCloudFirestore.Current
                                         .Instance
                                         .GetCollection("User")
-                                        .GetDocument(uid)
+                                        .GetDocument(UsersFirestore.userUID)
                                         .GetDocumentAsync();
 
             // Get all Team IDs

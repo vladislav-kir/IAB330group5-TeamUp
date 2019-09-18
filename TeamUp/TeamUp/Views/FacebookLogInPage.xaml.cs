@@ -76,8 +76,11 @@ namespace TeamUp.Views
                 // Authenticate user with Firebase Authentication & send the UID to the Firebase Server
                 string FirebaseUserUID = await AuthenticationFirebase.AuthenticateFacebookAsync(accessToken);
 
+                // Set the userUID to the app
+                UsersFirestore.userUID = FirebaseUserUID;
+
                 // Check if User is new ??
-                bool isNew = await UsersFirestore.IsNewUser(FirebaseUserUID);
+                bool isNew = await UsersFirestore.IsNewUser();
                 if(!isNew)
                 {
                     // Welcome back Page

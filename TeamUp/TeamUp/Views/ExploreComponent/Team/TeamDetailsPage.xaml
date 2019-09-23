@@ -10,6 +10,9 @@
         <StackLayout>
             <!-- Name & Bio Section -->
             <StackLayout>
+                <Image x:Name="imageView"
+                       Source="{Binding team.avatar}"
+                       HorizontalOptions="CenterAndExpand" />
                 <Label 
                     x:Name="nameView"
                     Text="{Binding team.name}"

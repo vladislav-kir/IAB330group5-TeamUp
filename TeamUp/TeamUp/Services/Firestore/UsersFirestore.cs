@@ -29,18 +29,17 @@ namespace TeamUp.Services.Firestore
             return user.avatar;
         }
 
-
         /*
          Get Specific User based on its ID.
          Please go to Firestore database to look it up
          */
-        public static async Task<User> GetMyProfileAsync()
+        public static async Task<User> GetUserByUIDAsync(string user_uid)
         {
             //Load document from Cloud Firestore
             var document = await CrossCloudFirestore.Current
                                         .Instance
                                         .GetCollection("User")
-                                        .GetDocument(userUID)
+                                        .GetDocument(user_uid)
                                         .GetDocumentAsync();
 
             // Convert Document to User Model
@@ -49,7 +48,20 @@ namespace TeamUp.Services.Firestore
             // Download avatar image
             user.avatar = await GetUserAvatarURLAsync(user);
 
+            // Get the Team Reference
+            user.team = await TeamsFirestore.GetUserTeamsAsync(user.Id);
+
+
             return user;
+        }
+
+        /*
+         Get My Profile
+         Please go to Firestore database to look it up
+         */
+        public static async Task<User> GetMyProfileAsync()
+        {
+            return await GetUserByUIDAsync(userUID);
         }
 
         /*
@@ -71,6 +83,9 @@ namespace TeamUp.Services.Firestore
             // Download avatar image
             user.avatar = await GetUserAvatarURLAsync(user);
 
+            // Get the Team Reference
+            user.team = await TeamsFirestore.GetUserTeamsAsync(user.Id);
+
             return user;
         }
 
@@ -90,10 +105,15 @@ namespace TeamUp.Services.Firestore
             // Convert to List of User Model
             var UsersList = query.ToObjects<User>().ToList();
 
-            // Download avatar image for each User in the UserList
+            // Download avatar image & Team reference for each User in the UserList
             UsersList.ForEach(async user =>
             {
                 user.avatar = await GetUserAvatarURLAsync(user);
+
+                string Id = user.Id;
+
+                // Get the Team Reference
+                user.team = await TeamsFirestore.GetUserTeamsAsync(user.Id);
             });
 
             return UsersList;

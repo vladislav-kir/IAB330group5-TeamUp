@@ -49,7 +49,47 @@
 
                     <!-- Playing -->
                     <Label Text="Playing:" />
-                
+
+                    <CollectionView ItemsSource="{Binding user.team}"
+                        ItemsLayout="HorizontalList">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid Padding="10" Margin="12">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="3*" />
+                                        <RowDefinition Height="2*" />
+                                    </Grid.RowDefinitions>
+
+                                    <StackLayout  >
+                                        <Image Source="{Binding avatar}"
+                                           Grid.Row="0"
+                                           Aspect="AspectFill" WidthRequest="50" HeightRequest="100" />
+                                    </StackLayout>
+                                    
+
+                                    <StackLayout Grid.Row="1">
+
+                                        <Label Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   Text="{Binding name}"
+                                   FontAttributes="Bold" />
+
+
+                                        <Label Text="{Binding bio}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   VerticalOptions="Start"
+                                   FontAttributes="Italic" />
+                                    </StackLayout>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                     <!-- This place is for Sport Playing - Dynamic Item will be generated -->
                 
                 </StackLayout>

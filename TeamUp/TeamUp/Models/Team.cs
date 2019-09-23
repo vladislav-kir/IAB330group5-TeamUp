@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.CloudFirestore.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,9 @@ namespace TeamUp.Models
 {
     public class Team
     {
+        public string avatar { get; set; }
+        [Id]
+        public string Id { get; set; }
         public string name { get; set; }
         public string sport { get; set; }
         public string location { get; set; }

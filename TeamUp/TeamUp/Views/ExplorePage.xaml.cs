@@ -13,6 +13,14 @@ namespace TeamUp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExplorePage : ContentPage
     {
+        /*
+         This represents the State of the Explore Page, whether the view is User or Team
+
+            If Team :   userView = false
+            If User :   userView = true
+        */
+        public static bool userView;
+
         public ExplorePage()
         {
             InitializeComponent();
@@ -23,28 +31,50 @@ namespace TeamUp.Views
             base.OnAppearing();
             Title = "Explore";
 
-            exploreUsersView.IsVisible = true;
-            userButton.IsEnabled = false;
-            exploreTeamsView.IsVisible = false;
-            teamButton.IsEnabled = true;
+            // At first, set the userView is true. So it always show User View on the first load
+            userView = true;
+
+            // Set the view state based on User view
+            setViewState();
         }
 
+        /**
+         * When button User has been clicked
+         */
         private void User_Clicked(object sender, EventArgs e)
         {
-            exploreUsersView.IsVisible = true;
-            userButton.IsEnabled = false;
-            exploreTeamsView.IsVisible = false;
-            teamButton.IsEnabled = true;
+            userView = true;
+
+            // Set the view state based on User view
+            setViewState();
         }
 
+        /**
+         * When button Team has been clicked
+         */
         private void Team_Clicked(object sender, EventArgs e)
         {
-            exploreTeamsView.IsVisible = true;
-            teamButton.IsEnabled = false;
-            exploreUsersView.IsVisible = false;
-            userButton.IsEnabled = true;
+            userView = false;
+
+            // Set the view state based on User view
+            setViewState();
         }
 
+        /**
+         * This method is setting up the View for Explore Page
+         * Including:
+         *  + User Button is Enabled ?
+         *  + User View is Visible ?
+         *  + Team Button is Enabled ?
+         *  + Team View is Visible ?
+         */
+        private void setViewState()
+        {
+            exploreUsersView.IsVisible = userView;
+            userButton.IsEnabled = !userView;
+            exploreTeamsView.IsVisible = !userView;
+            teamButton.IsEnabled = userView;
+        }
 
         private void LogOut_Clicked(object sender, EventArgs e)
         {

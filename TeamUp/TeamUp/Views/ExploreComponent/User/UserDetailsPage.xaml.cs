@@ -18,7 +18,9 @@ namespace TeamUp.Views
 
         public UserDetailsPage(UserDetailsPageViewModel userDetailsPageViewModel)
         {
+            
             InitializeComponent();
+            this.ForceLayout();
             BindingContext = this.userDetailsPageViewModel = userDetailsPageViewModel;
 
         }

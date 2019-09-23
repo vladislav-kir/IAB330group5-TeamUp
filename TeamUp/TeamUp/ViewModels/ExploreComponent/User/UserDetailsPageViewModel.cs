@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TeamUp.Models;
+using TeamUp.Services.Firestore;
 using Xamarin.Forms;
 namespace TeamUp.ViewModels
 {
@@ -14,6 +15,7 @@ namespace TeamUp.ViewModels
         {
             Title = user?.name;
             this.user = user;
+
         }
     }
 }

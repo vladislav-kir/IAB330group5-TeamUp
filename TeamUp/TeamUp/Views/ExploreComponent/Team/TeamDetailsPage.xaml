@@ -45,7 +45,7 @@
 
                     <!--{Binding Team.location}-->
                     <Label 
-                        x:Name="sportView"
+                        x:Name="locationView"
                         Text="{Binding Team.location}"
                         Grid.Row="0"
                         Grid.Column="1" 

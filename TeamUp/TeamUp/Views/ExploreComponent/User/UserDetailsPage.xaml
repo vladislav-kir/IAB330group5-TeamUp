@@ -8,126 +8,124 @@
              x:Class="TeamUp.Views.UserDetailsPage">
             
     <ContentPage.Content>
-        <StackLayout>
-            <!-- Name & Bio Section -->
-            <StackLayout>
-                <Image x:Name="avatarView" Source="{Binding user.avatar}"/>
-                <Label 
-                    x:Name="nameView"
-                    Text="{Binding user.name}"
-                    FontSize="Large"
-                    TextColor="Black"
-                    HorizontalOptions="CenterAndExpand" />
-
-                <Label 
-                    x:Name="bioView"
-                    Text="{Binding user.bio}"
-                    
-                    HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
+        <ScrollView>
             
-            
-
-            <!-- Profile section -->
-            <Frame >
-                <StackLayout>
-                    <Label 
-                            Text="Profile"
-                            TextColor="Black"
-                            FontSize="Medium"/>
-                    
-                    <!-- Age -->
-                    <StackLayout Orientation="Horizontal">
-                        <Label 
-                            Text="Age:"/>
-
-                        <Label 
-                            x:Name="ageView"
-                            Text="{Binding user.age}"
-                            HorizontalOptions="CenterAndExpand" />
-                    </StackLayout>
-
-                    <!-- Playing -->
-                    <Label Text="Playing:" />
-
-                    <CollectionView ItemsSource="{Binding user.team}"
-                        ItemsLayout="HorizontalList">
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-
-                                <Grid Padding="10" Margin="12">
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="3*" />
-                                        <RowDefinition Height="2*" />
-                                    </Grid.RowDefinitions>
-
-                                    <StackLayout  >
-                                        <Image Source="{Binding avatar}"
-                                           Grid.Row="0"
-                                           Aspect="AspectFill" WidthRequest="50" HeightRequest="100" />
-                                    </StackLayout>
-                                    
-
-                                    <StackLayout Grid.Row="1">
-
-                                        <Label Grid.Column="1"
-                                   VerticalOptions="Center"
-                                   Text="{Binding name}"
-                                   FontAttributes="Bold" />
-
-
-                                        <Label Text="{Binding bio}"
-                                   Grid.Row="1"
-                                   Grid.Column="1"
-                                   VerticalOptions="Start"
-                                   FontAttributes="Italic" />
-                                    </StackLayout>
-
-                                </Grid>
-
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <!-- This place is for Sport Playing - Dynamic Item will be generated -->
-                
-                </StackLayout>
-            </Frame>
-
-            <!-- Contact section -->
-            <Frame>
-                <StackLayout>
-                    <Label 
-                            Text="Contact"
-                            TextColor="Black"
-                            FontSize="Medium"/>
-                    
-                    <!-- Phone -->
-                    <StackLayout Orientation="Horizontal">
-                        <Label 
-                            Text="Phone:" />
-
-                        <Label 
-                            x:Name="phoneView"
-                            Text="{Binding user.phone}"
-                            HorizontalOptions="CenterAndExpand" />
-                    </StackLayout>
-
-                    <!-- Email -->
-                    <StackLayout Orientation="Horizontal">
-                        <Label 
-                            Text="Email:" />
-
-                        <Label 
-                            x:Name="emailView"
-                            Text="{Binding user.email}"
-                            HorizontalOptions="CenterAndExpand" />
-                    </StackLayout>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-
         
+            <StackLayout>
+                <!-- Name & Bio Section -->
+                <StackLayout>
+                    <Image x:Name="avatarView" Source="{Binding user.avatar}" WidthRequest="100" HeightRequest="100" />
+                    <Label 
+                        x:Name="nameView"
+                        Text="{Binding user.name}"
+                        FontSize="Large"
+                        TextColor="Black"
+                        HorizontalOptions="CenterAndExpand" />
+
+                    <Label 
+                        x:Name="bioView"
+                        Text="{Binding user.bio}"
+                    
+                        HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+            
+            
+
+                <!-- Profile section -->
+                <Frame >
+                    <StackLayout>
+                        <Label 
+                                Text="Profile"
+                                TextColor="Black"
+                                FontSize="Medium"/>
+                    
+                        <!-- Age -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label 
+                                Text="Age:"/>
+
+                            <Label 
+                                x:Name="ageView"
+                                Text="{Binding user.age}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+
+                        <!-- Playing -->
+                        <Label Text="Playing:" />
+
+                        
+                        <!-- This place is for Sport Playing - Dynamic Item will be generated -->
+                        <CarouselView   x:Name="CV" 
+                                        ItemsSource="{Binding user.team}" 
+                                        HeightRequest="120" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="CenterAndExpand" 
+                                        Margin="10">
+                            <CarouselView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"/>
+                            </CarouselView.ItemsLayout>
+                            
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame  CornerRadius="3" HasShadow="False" Padding="10">
+                                        <Grid>
+                                            
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="10*"/>
+                                                <RowDefinition Height="2*"/>
+                                            </Grid.RowDefinitions>
+                                            
+                                            <Image Grid.Column="0" Grid.Row="0" Aspect="AspectFill" HeightRequest="100" Source="{Binding avatar}" VerticalOptions="Start"/>
+                                            
+                                            <StackLayout Grid.Column="0" Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                                                <Label Text="{Binding name}" FontSize="16" HorizontalOptions="CenterAndExpand"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        
+                    </StackLayout>
+                </Frame>
+
+                <!-- Contact section -->
+                <Frame>
+                    <StackLayout>
+                        <Label 
+                                Text="Contact"
+                                TextColor="Black"
+                                FontSize="Medium"/>
+                    
+                        <!-- Phone -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label 
+                                Text="Phone:" />
+
+                            <Label 
+                                x:Name="phoneView"
+                                Text="{Binding user.phone}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+
+                        <!-- Email -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label 
+                                Text="Email:" />
+
+                            <Label 
+                                x:Name="emailView"
+                                Text="{Binding user.email}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

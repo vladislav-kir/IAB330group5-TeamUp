@@ -22,12 +22,12 @@ namespace TeamUp.Views
             this.ForceLayout();
             BindingContext = this.userDetailsPageViewModel = userDetailsPageViewModel;
 
+            userDetailsPageViewModel.LoadTeamPlayingCommand.Execute(null);
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
         }
     }
 }

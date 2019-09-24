@@ -48,8 +48,6 @@ namespace TeamUp.Services.Firestore
             // Download avatar image
             user.avatar = await GetUserAvatarURLAsync(user);
 
-            // Get the Team Reference
-            user.team = await TeamsFirestore.GetUserTeamsAsync(user.Id);
 
 
             return user;
@@ -83,8 +81,6 @@ namespace TeamUp.Services.Firestore
             // Download avatar image
             user.avatar = await GetUserAvatarURLAsync(user);
 
-            // Get the Team Reference
-            user.team = await TeamsFirestore.GetUserTeamsAsync(user.Id);
 
             return user;
         }
@@ -112,8 +108,6 @@ namespace TeamUp.Services.Firestore
 
                 string Id = user.Id;
 
-                // Get the Team Reference
-                user.team = await TeamsFirestore.GetUserTeamsAsync(user.Id);
             });
 
             return UsersList;

@@ -55,8 +55,10 @@
 
                         
                         <!-- This place is for Sport Playing - Dynamic Item will be generated -->
+                        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
                         <CarouselView   x:Name="CV" 
-                                        ItemsSource="{Binding user.team}" 
+                                        IsVisible="{Binding !IsBusy}"
+                                        ItemsSource="{Binding teamPlaying}" 
                                         HeightRequest="120" 
                                         HorizontalOptions="Center" 
                                         VerticalOptions="CenterAndExpand" 

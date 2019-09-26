@@ -24,6 +24,12 @@ namespace TeamUp.Views
         public ExplorePage()
         {
             InitializeComponent();
+
+            // At first, set the userView is true. So it always show User View on the first load
+            userView = true;
+
+            // Set the view state based on User view
+            setViewState();
         }
 
         protected override void OnAppearing()
@@ -31,11 +37,8 @@ namespace TeamUp.Views
             base.OnAppearing();
             Title = "Explore";
 
-            // At first, set the userView is true. So it always show User View on the first load
-            userView = true;
 
-            // Set the view state based on User view
-            setViewState();
+
         }
 
         /**

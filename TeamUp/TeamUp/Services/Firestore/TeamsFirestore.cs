@@ -83,11 +83,14 @@ namespace TeamUp.Services.Firestore
             List<Team> UserTeamList = new List<Team>();
 
             // Add all team to list, based on its ID
-            teamIDs.ForEach(async id =>
+            foreach (string team_uid in teamIDs)
             {
-                //Add to list
-                UserTeamList.Add(await GetTeamByIdAsync(id));
-            });
+                //Load the team by its ID having in User
+                Team team = await GetTeamByIdAsync(team_uid);
+
+                //Add it into collection of team
+                UserTeamList.Add(team);
+            }
 
             return UserTeamList;
         }

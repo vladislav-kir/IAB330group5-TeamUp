@@ -6,10 +6,83 @@
              mc:Ignorable="d"
              x:Class="TeamUp.Views.ProfilePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Your Profile!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+
+            <StackLayout>
+                <!-- Name & Bio Section -->
+                <StackLayout>
+                    <Image x:Name="avatarView" Source="{Binding User.avatar}" WidthRequest="100" HeightRequest="100" />
+                    <Label 
+                        x:Name="nameView"
+                        Text="{Binding User.name}"
+                        FontSize="Large"
+                        TextColor="Black"
+                        HorizontalOptions="CenterAndExpand" />
+
+                    <Label 
+                        x:Name="bioView"
+                        Text="{Binding User.bio}"
+                    
+                        HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+
+
+
+                <!-- Profile section -->
+                <Frame >
+                    <StackLayout>
+                        <Label 
+                                Text="Profile"
+                                TextColor="Black"
+                                FontSize="Medium"/>
+
+                        <!-- Age -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label 
+                                Text="Age:"/>
+
+                            <Label 
+                                x:Name="ageView"
+                                Text="{Binding User.age}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+                <!-- Contact section -->
+                <Frame>
+                    <StackLayout>
+                        <Label 
+                                Text="Contact"
+                                TextColor="Black"
+                                FontSize="Medium"/>
+
+                        <!-- Phone -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label 
+                                Text="Phone:" />
+
+                            <Label 
+                                x:Name="phoneView"
+                                Text="{Binding User.phone}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+
+                        <!-- Email -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label 
+                                Text="Email:" />
+
+                            <Label 
+                                x:Name="emailView"
+                                Text="{Binding User.email}"
+                                HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

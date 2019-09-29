@@ -83,11 +83,14 @@ namespace TeamUp.Services.Firestore
             List<Team> UserTeamList = new List<Team>();
 
             // Add all team to list, based on its ID
-            teamIDs.ForEach(async id =>
+            foreach (string team_uid in teamIDs)
             {
-                //Add to list
-                UserTeamList.Add(await GetTeamByIdAsync(id));
-            });
+                //Load the team by its ID having in User
+                Team team = await GetTeamByIdAsync(team_uid);
+
+                //Add it into collection of team
+                UserTeamList.Add(team);
+            }
 
             return UserTeamList;
         }
@@ -101,6 +104,31 @@ namespace TeamUp.Services.Firestore
         public static async Task<List<Team>> GetMyTeamsAsync()
         {
             return await GetUserTeamsAsync(UsersFirestore.userUID);
+        }
+
+        public static async Task<bool> IsNewTeam(Team team)
+        {
+            //Firstly Look up, whether there exists user
+            var document = await CrossCloudFirestore.Current
+                                        .Instance
+                                        .GetCollection("Team")
+                                        .GetDocument(team.Id)
+                                        .GetDocumentAsync();
+
+            return !document.Exists;
+        }
+
+
+        /*
+         Add a new Team to our Firestore Database
+         */
+        public static async Task AddTeamAsync(Team team)
+        {
+
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("Team")
+                         .AddDocumentAsync(team);
         }
     }
 }

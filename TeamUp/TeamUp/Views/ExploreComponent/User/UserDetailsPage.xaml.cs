@@ -22,7 +22,8 @@ namespace TeamUp.Views
             this.ForceLayout();
             BindingContext = this.userDetailsPageViewModel = userDetailsPageViewModel;
 
-            userDetailsPageViewModel.LoadTeamPlayingCommand.Execute(null);
+            if(userDetailsPageViewModel.user.team == null)
+                userDetailsPageViewModel.LoadTeamPlayingCommand.Execute(null);
         }
 
         protected async override void OnAppearing()

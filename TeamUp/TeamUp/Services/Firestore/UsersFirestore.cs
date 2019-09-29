@@ -102,13 +102,10 @@ namespace TeamUp.Services.Firestore
             var UsersList = query.ToObjects<User>().ToList();
 
             // Download avatar image & Team reference for each User in the UserList
-            UsersList.ForEach(async user =>
+            foreach(User user in UsersList)
             {
                 user.avatar = await GetUserAvatarURLAsync(user);
-
-                string Id = user.Id;
-
-            });
+            }
 
             return UsersList;
         }

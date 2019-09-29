@@ -5,6 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TeamUp.Views.ProfilePage">
+
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="End" WidthRequest="100">
+            <Button Text="Log out" Command="{Binding LogOutCommand}" WidthRequest="80" HorizontalOptions="End" />
+        </StackLayout>
+    </Shell.TitleView>
+    
     <ContentPage.Content>
         <ScrollView>
 

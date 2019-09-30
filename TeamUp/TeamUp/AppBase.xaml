@@ -6,7 +6,14 @@
        mc:Ignorable="d"
        xmlns:local="clr-namespace:TeamUp.Views"
        Title="AppBase"
-       x:Class="TeamUp.AppBase">
+       x:Class="TeamUp.AppBase"
+       BackgroundColor="#334856"
+       Shell.TabBarBackgroundColor="White"
+       Shell.TabBarForegroundColor="#1B1C20"
+       Shell.TitleColor="White"
+       Shell.TabBarUnselectedColor="LightGray"
+       Shell.TabBarTitleColor="#1B1C20"
+       >
 
     <!-- 
         Styles and Resources 

@@ -6,10 +6,25 @@
              mc:Ignorable="d"
              x:Class="TeamUp.Views.MyTeamsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                <ListView x:Name="teamsListView" 
+                              ItemsSource="{Binding teamsList}"
+                              ItemSelected="OnTeamSelected"
+                              RowHeight="100">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Horizontal">
+                                    <Image Source="{Binding avatar}" HeightRequest="80" WidthRequest="80" Aspect="AspectFit"></Image>
+                                    <Label Text="{Binding name}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"></Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

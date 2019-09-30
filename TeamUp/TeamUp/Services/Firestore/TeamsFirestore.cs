@@ -58,6 +58,42 @@ namespace TeamUp.Services.Firestore
 
             return TeamList;
         }
+        /**
+         * Function to get teams relating to user, authenticated with User UID
+         * 
+         * User must provide UID in order to have the information about their teams
+         * 
+         */
+        public static async Task<List<Team>> GetUserTeamsAsync(string user_uid)
+        {
+            var document = await CrossCloudFirestore.Current
+                                        .Instance
+                                        .GetCollection("User")
+                                        .GetDocument(user_uid)
+                                        .GetDocumentAsync();
+
+            // Get all Team IDs
+            var teamIDs = document.ToObject<User>().team_uid;
+
+            // Check whether user have a team
+            if (teamIDs == null)
+                return null;
+
+            // Create a new List of Team
+            List<Team> UserTeamList = new List<Team>();
+
+            // Add all team to list, based on its ID
+            foreach (string team_uid in teamIDs)
+            {
+                //Load the team by its ID having in User
+                Team team = await GetTeamByIdAsync(team_uid);
+
+                //Add it into collection of team
+                UserTeamList.Add(team);
+            }
+
+            return UserTeamList;
+        }
 
         /**
          * Function to get my teams, authenticated with User UID
@@ -67,26 +103,7 @@ namespace TeamUp.Services.Firestore
          */
         public static async Task<List<Team>> GetMyTeamsAsync()
         {
-            var document = await CrossCloudFirestore.Current
-                                        .Instance
-                                        .GetCollection("User")
-                                        .GetDocument(UsersFirestore.userUID)
-                                        .GetDocumentAsync();
-
-            // Get all Team IDs
-            var teamIDs = document.ToObject<User>().team;
-
-            // Create a new List of Team
-            List<Team> MyTeamList = new List<Team>();
-
-            // Add all team to list, based on its ID
-            teamIDs.ForEach(async id =>
-               {
-                   //Add to list
-                   MyTeamList.Add(await GetTeamByIdAsync(id));
-               });
-
-            return MyTeamList;
+            return await GetUserTeamsAsync(UsersFirestore.userUID);
         }
     }
 }

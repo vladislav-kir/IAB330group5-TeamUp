@@ -12,14 +12,15 @@
 
             <ListView x:Name="teamsListView" 
                           ItemsSource="{Binding teamsList}"
-                          ItemSelected="OnTeamSelected">
+                          ItemSelected="OnTeamSelected"
+                      RowHeight="100">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="10">
-                                <Image Source="{Binding avatar}"></Image>
-                                <Label Text="{Binding name}"></Label>
+                            <StackLayout Padding="10" Orientation="Horizontal">
+                                <Image Source="{Binding avatar}" HeightRequest="80" WidthRequest="80" Aspect="AspectFit"></Image>
+                                <Label Text="{Binding name}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"></Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

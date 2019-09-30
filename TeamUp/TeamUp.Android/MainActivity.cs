@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace TeamUp.Droid
 {
@@ -14,10 +16,14 @@ namespace TeamUp.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Forms.SetFlags("CollectionView_Experimental");
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            ImageCircleRenderer.Init();
 
             // This is for FirebaseAuth in Android
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);

@@ -31,6 +31,7 @@ namespace TeamUp.ViewModels
             if (IsBusy)
                 return;
 
+            // Loading .... --> The App become Busy
             IsBusy = true;
 
             try
@@ -39,7 +40,14 @@ namespace TeamUp.ViewModels
                 var users = await UsersFirestore.GetAllUsersAsync();
                 foreach (var user in users)
                 {
+                    // Exclude the my ID. Don't display myself in explore page
+                    if (user.Id == UsersFirestore.userUID)
+                        continue;
+
+                    // Otherwise add other users into usersList
                     usersList.Add(user);
+
+                    // Log the debug 
                     Debug.WriteLine("------------USER-------------");
                     Debug.WriteLine("**** name: " + user.name);
                     Debug.WriteLine("****  age: " + user.age);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TeamUp.Models;
@@ -18,15 +17,18 @@ namespace TeamUp.Views
 
         public UserDetailsPage(UserDetailsPageViewModel userDetailsPageViewModel)
         {
+            
             InitializeComponent();
+            this.ForceLayout();
             BindingContext = this.userDetailsPageViewModel = userDetailsPageViewModel;
 
+            if(userDetailsPageViewModel.user.team == null)
+                userDetailsPageViewModel.LoadTeamPlayingCommand.Execute(null);
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
         }
     }
 }

@@ -8,7 +8,7 @@ using TeamUp.Models;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using TeamUp.Services.Firestore;
-
+using TeamUp.Views;
 
 namespace TeamUp.ViewModels
 {
@@ -26,6 +26,13 @@ namespace TeamUp.ViewModels
             LoadTeamsCommand = new Command(async () => await ExecuteLoadTeamsCommand());
         }
 
+        public Command AddTeamCommand
+        {
+            get
+            {
+                return new Command(async () => await App.Current.MainPage.Navigation.PushAsync(new CreateTeamPage()));
+            }
+        }
         async Task ExecuteLoadTeamsCommand()
         {
             if (IsBusy)

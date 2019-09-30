@@ -37,5 +37,10 @@ namespace TeamUp.Views
 
             await Navigation.PushAsync(new TeamDetailsPage(new TeamDetailsPageViewModel(team)));
         }
+
+        async void CreateTeam_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CreateTeamPage());
+        }
     }
 }

@@ -105,5 +105,30 @@ namespace TeamUp.Services.Firestore
         {
             return await GetUserTeamsAsync(UsersFirestore.userUID);
         }
+
+        public static async Task<bool> IsNewTeam(Team team)
+        {
+            //Firstly Look up, whether there exists user
+            var document = await CrossCloudFirestore.Current
+                                        .Instance
+                                        .GetCollection("Team")
+                                        .GetDocument(team.Id)
+                                        .GetDocumentAsync();
+
+            return !document.Exists;
+        }
+
+
+        /*
+         Add a new Team to our Firestore Database
+         */
+        public static async Task AddTeamAsync(Team team)
+        {
+
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("Team")
+                         .AddDocumentAsync(team);
+        }
     }
 }

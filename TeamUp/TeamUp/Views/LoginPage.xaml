@@ -9,28 +9,33 @@
 
 
     <StackLayout>
-        <Label Text="Welcome to TeamUp!!!" 
-           HorizontalOptions="Center" />
+        <StackLayout HeightRequest="300" BackgroundColor="#334856">
+            <Image VerticalOptions="Start" HorizontalOptions="CenterAndExpand" Source="logo.png" HeightRequest="200" WidthRequest="200"/>
+            <Label FontFamily="Pacifico-Regular.ttf#Pacifico" FontSize="40" TextColor="White" Text="TeamUp" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"/>
+        </StackLayout>
 
-        <Label Text="Email" />
-        <Entry Placeholder="Your email" Text="{Binding Email}"/>
+        <StackLayout >
+            <Label Margin="20" Text="Email" />
+            <Entry  Placeholder="Your email" Text="{Binding Email}"/>
 
-        <Label Text="Password" />
-        <Entry IsPassword="True" Placeholder="Your password" Text="{Binding Password}"/>
-        
-        <Button Text="Login"
+            <Label Margin="20" Text="Password" />
+            <Entry IsPassword="True" Placeholder="Your password" Text="{Binding Password}"/>
+
+            <Button Text="Login"
                 VerticalOptions="End"
                 HorizontalOptions="Center" 
                 Command="{Binding LoginCommand}"
                />
-        
-        <Button Text="Login with Facebook"
+
+            <Button Text="Login with Facebook"
                 VerticalOptions="End"
                 HorizontalOptions="Center" 
                 Command="{Binding LoginFacebookCommand}"
                 BackgroundColor="Cyan"
                 TextColor="White"
                />
+        </StackLayout>
+        
         
     </StackLayout>
 

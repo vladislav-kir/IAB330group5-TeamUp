@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using TeamUp.Models;
+using TeamUp.Services;
 using TeamUp.Services.Firestore;
+using TeamUp.Views;
 using Xamarin.Forms;
 
 namespace TeamUp.ViewModels
@@ -45,6 +47,18 @@ namespace TeamUp.ViewModels
             catch(Exception e)
             {
                 Debug.WriteLine(e);
+            }
+        }
+
+        public Command LogOutCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    DependencyService.Get<IClearCookies>().ClearAllCookies();
+                    await App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
+                });
             }
         }
     }

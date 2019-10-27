@@ -60,6 +60,13 @@
                     Text="{Binding Team.bio}"
                     Margin="20, -10, 20, 0" 
                     />
+                
+                <!-- Join/Leave team button-->
+                <Button 
+                    x:Name="joinTeamButton"
+                    TextColor="Black"
+                    Clicked="JoinButtonClicked"
+                    />
 
                 <!-- Add member list here -->
             </StackLayout>

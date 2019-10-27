@@ -92,15 +92,16 @@ namespace TeamUp.ViewModels
                 return new Command(async () =>
                 {
                     team = new Team
-                    {   
-                        
-                        name = team.name,
-                        sport = team.sport,
-                        location = team.location,
-                        bio = team.bio,
+                    {
+                        name = Name,
+                        sport = Sport,
+                        location = Location,
+                        bio = Bio,
+                        member = new List<string>() { UsersFirestore.userUID },
                         team_leader = UsersFirestore.userUID
                     };
                     await TeamsFirestore.AddTeamAsync(team);
+                    await UsersFirestore.AddTeamToUser(UsersFirestore.userUID, team);
                     await App.Current.MainPage.Navigation.PushModalAsync(new TeamDetailsPage(new TeamDetailsPageViewModel(team)));
                 });
             }

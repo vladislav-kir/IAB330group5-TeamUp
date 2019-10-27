@@ -58,6 +58,23 @@ namespace TeamUp.Services.Firestore
 
             return TeamList;
         }
+
+        /**
+         * Function to get a list of members in the team
+         */
+        public static async Task<List<String>> GetTeamMembersAsync(Team team)
+        {
+            var document = await CrossCloudFirestore.Current
+                                        .Instance
+                                        .GetCollection("Team")
+                                        .GetDocument(team.Id)
+                                        .GetDocumentAsync();
+
+            var UserList = document.ToObject<Team>().member;
+
+            return UserList;
+        }
+
         /**
          * Function to get teams relating to user, authenticated with User UID
          * 
@@ -118,7 +135,6 @@ namespace TeamUp.Services.Firestore
             return !document.Exists;
         }
 
-
         /*
          Add a new Team to our Firestore Database
          */
@@ -129,6 +145,28 @@ namespace TeamUp.Services.Firestore
                          .Instance
                          .GetCollection("Team")
                          .AddDocumentAsync(team);
+        }
+
+        /**
+         * Check if a member is in the team
+         */
+        public static async Task<bool> IsUserInTeam(string userId, Team team)
+        {
+            List<String> teamList = await GetTeamMembersAsync(team);
+            bool result = teamList.Contains(userId);
+            return result;
+        }
+        /**
+         * Adds a user to a team
+         */
+        public static async Task AddUserToTeam(string userId, Team team)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("Team")
+                         .GetDocument(team.Id)
+                         .UpdateDataAsync("member", FieldValue.ArrayUnion(userId));
+            await UsersFirestore.AddTeamToUser(userId, team);
         }
     }
 }

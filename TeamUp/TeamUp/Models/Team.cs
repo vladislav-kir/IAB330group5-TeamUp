@@ -18,6 +18,7 @@ namespace TeamUp.Models
         public List<String> memberRequest { get; set; }
         public string team_leader { get; set; }
 
+        public string level { get; set; }
         public override string ToString()
         {
             return this.name;

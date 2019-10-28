@@ -168,5 +168,18 @@ namespace TeamUp.Services.Firestore
                          .UpdateDataAsync("member", FieldValue.ArrayUnion(userId));
             await UsersFirestore.AddTeamToUser(userId, team);
         }
+
+        /**
+         * Remove user from a team
+         */
+        public static async Task RemoveUserFromTeam(string userId, Team team)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("Team")
+                         .GetDocument(team.Id)
+                         .UpdateDataAsync("member", FieldValue.ArrayRemove(userId));
+            await UsersFirestore.AddTeamToUser(userId, team);
+        }
     }
 }

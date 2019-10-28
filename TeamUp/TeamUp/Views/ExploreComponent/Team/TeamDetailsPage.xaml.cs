@@ -44,12 +44,16 @@ namespace TeamUp.Views
             if (!userInTeam)
             {
                 await TeamsFirestore.AddUserToTeam(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
+                await UsersFirestore.AddTeamToUser(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
                 joinTeamButton.Text = "Leave Team";
+                userInTeam = true;
             }
             else
             {
-                
+                await TeamsFirestore.RemoveUserFromTeam(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
+                await UsersFirestore.RemoveTeamFromUser(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
                 joinTeamButton.Text = "Join Team";
+                userInTeam = false;
             }
         }
     }

@@ -159,5 +159,18 @@ namespace TeamUp.Services.Firestore
                          .GetDocument(userId)
                          .UpdateDataAsync("team", FieldValue.ArrayRemove(team.Id));
         }
+
+        /**
+         * Adds a team to a user
+         */
+        public static async Task AddNotificationToUser(string userId, Team team)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("User")
+                         .GetDocument(userId)
+                         .UpdateDataAsync("team", FieldValue.ArrayUnion(team.Id));
+        }
+
     }
 }

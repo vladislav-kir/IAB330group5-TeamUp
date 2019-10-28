@@ -15,6 +15,8 @@ namespace TeamUp.Models
         public string location { get; set; }
         public string bio { get; set; }
         public List<String> member { get; set; }
+
+        [MapTo("member_request")]
         public List<String> memberRequest { get; set; }
         public string team_leader { get; set; }
 

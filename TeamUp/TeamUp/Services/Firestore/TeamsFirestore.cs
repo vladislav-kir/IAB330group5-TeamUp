@@ -76,6 +76,22 @@ namespace TeamUp.Services.Firestore
         }
 
         /**
+         * Function to get a list of request to joining team
+         */
+        public static async Task<List<String>> GetTeamMemberRequestsAsync(Team team)
+        {
+            var document = await CrossCloudFirestore.Current
+                                        .Instance
+                                        .GetCollection("Team")
+                                        .GetDocument(team.Id)
+                                        .GetDocumentAsync();
+
+            var requestsList = document.ToObject<Team>().memberRequest;
+
+            return requestsList;
+        }
+
+        /**
          * Function to get teams relating to user, authenticated with User UID
          * 
          * User must provide UID in order to have the information about their teams
@@ -147,15 +163,54 @@ namespace TeamUp.Services.Firestore
                          .AddDocumentAsync(team);
         }
 
+
+
+
+        //----------------------------------------------------
         /**
-         * Check if a member is in the team
+         * Check if a relationship between user & team
          */
-        public static async Task<bool> IsUserInTeam(string userId, Team team)
+        enum relationshipType
         {
-            List<String> teamList = await GetTeamMembersAsync(team);
-            bool result = teamList.Contains(userId);
+            isOutside = 0,
+            isRequesting = 1,
+            isInside = 2
+        };
+        public static async Task<sbyte> relationship(string userId, Team team)
+        {
+            List<String> membersList = await GetTeamMembersAsync(team);
+
+            //Default is outside Team
+            sbyte result = (sbyte) relationshipType.isOutside;
+
+            if (membersList.Contains(userId))
+                result = (sbyte) relationshipType.isInside;
+            else
+            //If not inside the team, check if they are requesting to joining team
+            {
+                List<String> requestsList = await GetTeamMemberRequestsAsync(team);
+
+                if (requestsList.Contains(userId))
+                    result = (sbyte)relationshipType.isRequesting;
+            }
+
             return result;
         }
+
+        //----------------------------------------------------
+
+        /**
+         * Adds a user request to a team
+         */
+        public static async Task AddUserRequestToTeam(string userId, Team team)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("Team")
+                         .GetDocument(team.Id)
+                         .UpdateDataAsync("member_request", FieldValue.ArrayUnion(userId));
+        }
+
         /**
          * Adds a user to a team
          */
@@ -166,7 +221,6 @@ namespace TeamUp.Services.Firestore
                          .GetCollection("Team")
                          .GetDocument(team.Id)
                          .UpdateDataAsync("member", FieldValue.ArrayUnion(userId));
-            await UsersFirestore.AddTeamToUser(userId, team);
         }
 
         /**
@@ -179,7 +233,18 @@ namespace TeamUp.Services.Firestore
                          .GetCollection("Team")
                          .GetDocument(team.Id)
                          .UpdateDataAsync("member", FieldValue.ArrayRemove(userId));
-            await UsersFirestore.AddTeamToUser(userId, team);
+        }
+
+        /**
+         * Remove user request from a team
+         */
+        public static async Task RemoveUserRequestFromTeam(string userId, Team team)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("Team")
+                         .GetDocument(team.Id)
+                         .UpdateDataAsync("member_request", FieldValue.ArrayRemove(userId));
         }
     }
 }

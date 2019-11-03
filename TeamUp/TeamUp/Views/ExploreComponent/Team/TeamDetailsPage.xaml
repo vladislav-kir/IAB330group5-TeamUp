@@ -10,48 +10,27 @@
     <ContentPage.BindingContext>
         <vm:TeamDetailsPageViewModel/>
     </ContentPage.BindingContext>
+
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <!--{Binding Team.name}-->
+
+                <Image Source="{Binding Team.avatar}" HorizontalOptions="Center" HeightRequest="150" WidthRequest="150"/>
+
+
+
                 <Label 
                         x:Name="nameView"
                         Text="{Binding Team.name}" 
                         FontSize="Large"
                         TextColor="Black"
                         HorizontalOptions="Center"
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
                         Margin="20"
                         />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
 
-                    <!--{Binding Team.sport}-->
-                    <Label 
-                        x:Name="sportView"
-                        Text="{Binding Team.sport}"
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        Margin="20, 0, 0, 0" />
-
-                    <!--{Binding Team.location}-->
-                    <Label 
-                        x:Name="locationView"
-                        Text="{Binding Team.location}"
-                        Grid.Row="0"
-                        Grid.Column="1" 
-                        Margin="0, 0, 0, 0" />
-                </Grid>
-
+                <Label Text="👨‍✈️ You are team leader 👨‍✈️" IsVisible="{Binding isTeamLeader}" HorizontalOptions="Center"/>
+                
                 <!--{Binding Team.bio}-->
                 <Label 
                     x:Name="bioView"
@@ -60,15 +39,89 @@
                     Text="{Binding Team.bio}"
                     Margin="20, -10, 20, 0" 
                     />
-                
-                <!-- Join/Leave team button-->
-                <Button 
-                    x:Name="joinTeamButton"
-                    TextColor="Black"
-                    Clicked="JoinButtonClicked"
-                    />
 
-                <!-- Add member list here -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Info" x:Name="InfoButton" CornerRadius="10" Clicked="InfoButton_Clicked" HeightRequest="50" HorizontalOptions="Center"/>
+                    <Button Text="Members" CornerRadius="10" x:Name="MembersButton" Clicked="MembersButton_Clicked" HeightRequest="50" HorizontalOptions="Center"/>
+                    <Button x:Name="joinTeamButton" CornerRadius="10" Clicked="JoinButtonClicked"  HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <Frame Margin="20" CornerRadius="20" HasShadow="True" x:Name="InfoFrame" IsVisible="False">
+                    <StackLayout>
+                        
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Team Leader:"/>
+                            <Label Text="{Binding TeamLeader.name}"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Sport:"/>
+                            <Label Text="{Binding Team.sport}"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Level:"/>
+                            <Label Text="{Binding Team.level}"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Location:"/>
+                            <Label Text="{Binding Team.location}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Margin="20" CornerRadius="20" HasShadow="True" x:Name="MembersFrame" HeightRequest="200" IsVisible="False">
+                    <StackLayout>
+                        <!-- Join/Leave team button -->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <ImageButton Source="plus.png" 
+                            HeightRequest="20"
+                            BackgroundColor="Transparent"
+                            WidthRequest="20"
+                            HorizontalOptions="End"/>
+                            
+                            <Label Text="Invite" HorizontalOptions="End"/>
+                        </StackLayout>
+                            
+                        
+                        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                        <CarouselView   x:Name="CV" 
+                                        ItemsSource="{Binding Members}" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="CenterAndExpand" 
+                                        Margin="10">
+                            <CarouselView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical"/>
+                            </CarouselView.ItemsLayout>
+
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame  CornerRadius="3" HasShadow="False" Padding="10">
+                                        <Grid>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="5*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Column="0" Grid.Row="0" Aspect="AspectFill" HeightRequest="100" Source="{Binding avatar}" HorizontalOptions="Start"/>
+
+                                            <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                                                <Label Text="{Binding name}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                    </StackLayout>
+                </Frame>
+               
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -41,7 +41,7 @@ namespace TeamUp.ViewModels
                 foreach (var user in users)
                 {
                     // Exclude the my ID. Don't display myself in explore page
-                    if (user.Id == UsersFirestore.userUID)
+                    if (user.Id == UsersFirestore.myProfile.Id)
                         continue;
 
                     // Otherwise add other users into usersList

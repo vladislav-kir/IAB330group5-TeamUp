@@ -97,15 +97,15 @@ namespace TeamUp.ViewModels
                         sport = Sport,
                         location = Location,
                         bio = Bio,
-                        member = new List<string>() { UsersFirestore.userUID },
-                        team_leader = UsersFirestore.userUID,
+                        member = new List<string>() { UsersFirestore.myProfile.Id },
+                        team_leader = UsersFirestore.myProfile.Id,
                         memberRequest = null,
                         avatar = null,
                         level = null
                     };
 
                     await TeamsFirestore.AddTeamAsync(team);
-                    await UsersFirestore.AddTeamToUser(UsersFirestore.userUID, team);
+                    await UsersFirestore.AddTeamToUserAsync(UsersFirestore.myProfile.Id, team);
                     await App.Current.MainPage.Navigation.PushModalAsync(new TeamDetailsPage(new TeamDetailsPageViewModel(team)));
                 });
             }

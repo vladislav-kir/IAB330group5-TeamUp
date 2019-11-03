@@ -20,10 +20,13 @@ namespace TeamUp.Views
             Title = "Profile";
             BindingContext = profilePageViewModel = new ProfilePageViewModel();
 
-            if(profilePageViewModel.User == null)
+            /**
+             * if(profilePageViewModel.User == null)
             {
                 profilePageViewModel.LoadMyProfile.Execute(null);
             }
+             */
+
         }
     }
 }

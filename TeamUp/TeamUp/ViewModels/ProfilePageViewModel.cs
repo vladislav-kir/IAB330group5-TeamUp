@@ -32,6 +32,8 @@ namespace TeamUp.ViewModels
 
         public ProfilePageViewModel()
         {
+            User = UsersFirestore.myProfile;
+
             LoadMyProfile = new Command(async () => await loadMyProfileAsync());
 
         }

@@ -72,7 +72,7 @@ namespace TeamUp.ViewModels
             CrossCloudFirestore.Current
                 .Instance
                 .GetCollection("User")
-                .GetDocument(UsersFirestore.userUID)
+                .GetDocument(UsersFirestore.myProfile.Id)
 
                 //This is the Realtime method, it happens whenever our data is changed (which is the user document)
                 .AddSnapshotListener( async (snapshot, error) =>

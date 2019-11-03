@@ -16,6 +16,8 @@
                Padding="8,30">
 
             <!-- At first, we don't get it Visible, If user is Not NEW, we display this-->
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+            
             <StackLayout x:Name="WelcomeView" IsVisible="False">
                 <Label FontSize="Large" Text="Welcome Back" HorizontalOptions="CenterAndExpand"/>
 
@@ -36,7 +38,7 @@
 
                     </StackLayout>
 
-                <Button Text="Continue" Command="{Binding GoToMainPage}" />
+                <Button Text="Continue" Command="{Binding GoToMainPage}"/>
 
             </StackLayout>
 

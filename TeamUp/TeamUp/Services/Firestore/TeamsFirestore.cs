@@ -136,7 +136,7 @@ namespace TeamUp.Services.Firestore
          */
         public static async Task<List<Team>> GetMyTeamsAsync()
         {
-            return await GetUserTeamsAsync(UsersFirestore.userUID);
+            return await GetUserTeamsAsync(UsersFirestore.myProfile.Id);
         }
 
         public static async Task<bool> IsNewTeam(Team team)
@@ -176,7 +176,7 @@ namespace TeamUp.Services.Firestore
             isRequesting = 1,
             isInside = 2
         };
-        public static async Task<sbyte> relationship(string userId, Team team)
+        public static async Task<sbyte> GetRelationshipAsync(string userId, Team team)
         {
             List<String> membersList = await GetTeamMembersAsync(team);
 
@@ -202,7 +202,7 @@ namespace TeamUp.Services.Firestore
         /**
          * Adds a user request to a team
          */
-        public static async Task AddUserRequestToTeam(string userId, Team team)
+        public static async Task AddUserRequestToTeamAsync(string userId, Team team)
         {
             await CrossCloudFirestore.Current
                          .Instance
@@ -214,7 +214,7 @@ namespace TeamUp.Services.Firestore
         /**
          * Adds a user to a team
          */
-        public static async Task AddUserToTeam(string userId, Team team)
+        public static async Task AddUserToTeamAsync(string userId, Team team)
         {
             await CrossCloudFirestore.Current
                          .Instance
@@ -226,7 +226,7 @@ namespace TeamUp.Services.Firestore
         /**
          * Remove user from a team
          */
-        public static async Task RemoveUserFromTeam(string userId, Team team)
+        public static async Task RemoveUserFromTeamAsync(string userId, Team team)
         {
             await CrossCloudFirestore.Current
                          .Instance
@@ -238,7 +238,7 @@ namespace TeamUp.Services.Firestore
         /**
          * Remove user request from a team
          */
-        public static async Task RemoveUserRequestFromTeam(string userId, Team team)
+        public static async Task RemoveUserRequestFromTeamAsync(string userId, Team team)
         {
             await CrossCloudFirestore.Current
                          .Instance

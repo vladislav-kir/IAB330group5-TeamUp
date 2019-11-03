@@ -73,28 +73,36 @@ namespace TeamUp.Views
                 // Set their Profile using the Function written in its ViewModel with the AccessToken
                 await vm.SetFacebookUserProfileAsync(accessToken);
 
+                // Set the userUID to the app
+                
+                Content = MainStackLayout;
+
+                vm.IsBusy = true;
+
                 // Authenticate user with Firebase Authentication & send the UID to the Firebase Server
                 string FirebaseUserUID = await AuthenticationFirebase.AuthenticateFacebookAsync(accessToken);
 
-                // Set the userUID to the app
-                UsersFirestore.userUID = FirebaseUserUID;
-
                 // Check if User is new ??
-                bool isNew = await UsersFirestore.IsNewUser();
+                bool isNew = await UsersFirestore.IsNewUser(FirebaseUserUID);
                 if(!isNew)
                 {
+                    
+                    UsersFirestore.myProfile = await UsersFirestore.GetUserByUIDAsync(FirebaseUserUID);
+                    vm.IsBusy = false;
+
                     // Welcome back Page
                     WelcomeView.IsVisible = true;
-                    Content = MainStackLayout;
+
+
                 }  
                 else
                 {
                     // Init a new user details based on Facebook Profile
                     vm.FirstUserInit(FirebaseUserUID);
+                    vm.IsBusy = false;
 
                     // User question add page
                     RegisterView.IsVisible = true;
-                    Content = MainStackLayout;
                 }
 
             }

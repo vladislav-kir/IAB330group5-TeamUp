@@ -42,7 +42,10 @@ namespace TeamUp.Views
             base.OnAppearing();
 
             //Establish relationship with team
-            userStatus = await TeamsFirestore.relationship(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
+            userStatus = await TeamsFirestore.GetRelationshipAsync(UsersFirestore.myProfile.Id, teamDetailsPageViewModel.Team);
+
+            InfoFrame.IsVisible = true;
+            InfoButton.IsEnabled = false;
 
             switch(userStatus)
             {
@@ -66,29 +69,78 @@ namespace TeamUp.Views
             {
 
                 case (sbyte)relationshipType.isInside:
-                    //If is already inside Team, then button is for leaving the team
-                    await TeamsFirestore.RemoveUserFromTeam(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
-                    await UsersFirestore.RemoveTeamFromUser(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
-                    joinTeamButton.Text = "Join Team";
-                    userStatus = (sbyte) relationshipType.isOutside;
+                    var answer = await DisplayAlert("Exit", "Do you really want to leave your group ?", "Leave", "Cancel");
+                    
+                    if(answer)
+                    {
+                        //If is already inside Team, then button is for leaving the team
+                        await TeamsFirestore.RemoveUserFromTeamAsync(UsersFirestore.myProfile.Id, teamDetailsPageViewModel.Team);
+                        await UsersFirestore.RemoveTeamFromUserAsync(UsersFirestore.myProfile.Id, teamDetailsPageViewModel.Team);
+
+                        //Remove notifications in database
+                        await NotificationsFirestore.DeleteNotificationAsync(UsersFirestore.myProfile.Id + teamDetailsPageViewModel.Team.Id);
+
+                        joinTeamButton.Text = "Join Team";
+                        userStatus = (sbyte)relationshipType.isOutside;
+                    }
+                    
                     break;
 
                 case (sbyte)relationshipType.isRequesting:
                     //If is requesting, then button is for cancelled
-                    await TeamsFirestore.RemoveUserRequestFromTeam(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
+                    await TeamsFirestore.RemoveUserRequestFromTeamAsync(UsersFirestore.myProfile.Id, teamDetailsPageViewModel.Team);
+
+                    //Remove arised notification
+                    await NotificationsFirestore.DeleteNotificationAsync(UsersFirestore.myProfile.Id + teamDetailsPageViewModel.Team.Id);
+                    await UsersFirestore.RemoveNotificationFromUserAsync(teamDetailsPageViewModel.Team.team_leader
+                                                        , /*Generate ID = User_id + Team_id*/ UsersFirestore.myProfile.Id + teamDetailsPageViewModel.Team.Id);
+
                     joinTeamButton.Text = "Join Team";
                     userStatus = (sbyte)relationshipType.isOutside;
                     break;
 
                 case (sbyte)relationshipType.isOutside:
                     //If is outside, then button is for request joining team
-                    await TeamsFirestore.AddUserRequestToTeam(UsersFirestore.userUID, teamDetailsPageViewModel.Team);
+                    await TeamsFirestore.AddUserRequestToTeamAsync(UsersFirestore.myProfile.Id, teamDetailsPageViewModel.Team);
+
+                    // Create a notification
+                    Notification notification = new Notification
+                    {
+                        Id = UsersFirestore.myProfile.Id + teamDetailsPageViewModel.Team.Id,
+                        team_id = teamDetailsPageViewModel.Team.Id,
+                        user_id = UsersFirestore.myProfile.Id,
+                        status = "",
+                        type = "member_request"
+                    };
+
+                    // Arise a notification to the team leader of that team
+                    await UsersFirestore.AddNotificationToUserAsync(teamDetailsPageViewModel.Team.team_leader, notification.Id);
+
+                    //Push notification online
+                    await NotificationsFirestore.CreateNotificationAsync(notification);
+
                     joinTeamButton.Text = "✔️ Requested";
                     joinTeamButton.BackgroundColor = Color.FromHex("#D3D3D3");
                     userStatus = (sbyte)relationshipType.isRequesting;
                     break;
             }
 
+        }
+
+        private void MembersButton_Clicked(object sender, EventArgs e)
+        {
+            InfoFrame.IsVisible = false;
+            InfoButton.IsEnabled = true;
+            MembersFrame.IsVisible = true;
+            MembersButton.IsEnabled = false;
+        }
+
+        private void InfoButton_Clicked(object sender, EventArgs e)
+        {
+            InfoFrame.IsVisible = true;
+            InfoButton.IsEnabled = false;
+            MembersFrame.IsVisible = false;
+            MembersButton.IsEnabled = true;
         }
     }
 }

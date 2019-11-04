@@ -11,7 +11,7 @@ namespace TeamUp.Services.Firestore
 {
     public class UsersFirestore
     {
-        static FirebaseStorage firebaseStorage = new FirebaseStorage("teamup-b7a43.appspot.com");
+        static readonly FirebaseStorage firebaseStorage = new FirebaseStorage("teamup-b7a43.appspot.com");
         public static User myProfile { get; set; }
         
         public static async Task<String> GetUserAvatarURLAsync(User user)

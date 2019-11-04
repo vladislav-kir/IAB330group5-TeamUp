@@ -15,10 +15,10 @@
         </StackLayout>
 
         <StackLayout >
-            <Label Margin="20" Text="Email" />
+            <Label Margin="10" Text="Email" />
             <Entry  Placeholder="Your email" Text="{Binding Email}"/>
 
-            <Label Margin="20" Text="Password" />
+            <Label Margin="10" Text="Password" />
             <Entry IsPassword="True" Placeholder="Your password" Text="{Binding Password}"/>
 
             <Button Text="Login"

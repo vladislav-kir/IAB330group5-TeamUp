@@ -180,7 +180,7 @@ namespace XUnitTestProject1
         public async Task Test8_RemoveUserFromTeamAsync()
         {
             //Arrange 
-            string user_id = "ryZJ4v8INRes4o2ZxEaNOPDtqgo2"
+            string user_id = "ryZJ4v8INRes4o2ZxEaNOPDtqgo2";
 
             string team_id = "Xu3FwHcyJpeDuXIk1vti";
             var team = await TeamsFirestore.GetTeamByIdAsync(team_id);

@@ -41,7 +41,6 @@ namespace TeamUp.Services.Firestore
                                         .Instance
                                         .GetCollection("User")
                                         .GetDocument(user_uid)
-                                       
                                         .GetDocumentAsync();
 
             // Convert Document to User Model

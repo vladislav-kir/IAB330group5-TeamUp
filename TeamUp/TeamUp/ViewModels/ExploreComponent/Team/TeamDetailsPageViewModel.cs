@@ -33,7 +33,6 @@ namespace TeamUp.ViewModels
 
         public ObservableCollection<User> Members { get; set; }
 
-        public TeamDetailsPageViewModel() { }
         public TeamDetailsPageViewModel(Team team = null)
         {
             Title = team?.name;

@@ -13,7 +13,7 @@ using Plugin.CloudFirestore;
 
 namespace TeamUp.ViewModels
 {
-    class MyTeamsPageViewModel: BaseViewModel
+    public class MyTeamsPageViewModel: BaseViewModel
     {
         public ObservableCollection<Team> teamsList { get; set; }
         public Command LoadTeamsCommand { get; set; }

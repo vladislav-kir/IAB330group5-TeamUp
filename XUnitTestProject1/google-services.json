@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "716950263541",
+    "firebase_url": "https://teamup-b7a43.firebaseio.com",
+    "project_id": "teamup-b7a43",
+    "storage_bucket": "teamup-b7a43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716950263541:android:316b585dc525704bafd7bc",
+        "android_client_info": {
+          "package_name": "com.iab.teamup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716950263541-h9qf3qjkgcv04jr7rt81p46i9u0fa686.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL8aosuen70B2ekFFFP-S_oWAALZ4TV7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716950263541-h9qf3qjkgcv04jr7rt81p46i9u0fa686.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

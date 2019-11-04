@@ -12,7 +12,7 @@ using TeamUp.Services.Firestore;
 
 namespace TeamUp.ViewModels
 {
-    class ExploreUsersViewViewModel : BaseViewModel
+    public class ExploreUsersViewViewModel : BaseViewModel
     {
         public ObservableCollection<User> usersList { get; set; }
         public Command LoadUsersCommand { get; set; }

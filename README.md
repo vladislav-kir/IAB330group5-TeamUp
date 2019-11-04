@@ -6,6 +6,6 @@ Demo Account in used:
 + *password*: 123456789
 
 
-~ASSUMPTION
+# ASSUMPTION
 + *functionality*:   ideal functions such as team matching with others, arranging, sorting, filtering might not be developed due to limitation of time.
 + *unit testing*:  Because of cross-platform programming, Xamarin Unit Testing does not support Libraries, which must be configured in specific project (Android & iOS), such as Firestore - google_services.json. Therefore, Unit Testing is written, but might not run, due to the cross-platform specificality 

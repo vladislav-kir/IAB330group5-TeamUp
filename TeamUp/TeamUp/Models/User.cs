@@ -14,6 +14,12 @@ namespace TeamUp.Models
         public string email { get; set; }
         public List<String> invitation { get; set; }
         public Dictionary<string, string> level { get; set; }
+
+        /**
+         * This will map directly "notifications" from Firestore to --> List of string of ID that refer to notifications
+         * **/
+        [MapTo("notifications")]
+        public List<string> notification_id { get; set; }
         public string name { get; set; }
         public string phone { get; set; }
         public Dictionary<string, string> role { get; set; }
@@ -27,9 +33,11 @@ namespace TeamUp.Models
         /**
          * This will store the Team objects.
          * **/
+        [Ignored]
         public List<Team> team { get; set; }
         public string avatar { get; set; }
 
+        public List<string> team_leader { get; set; }
         public override string ToString()
         {
             return this.name;

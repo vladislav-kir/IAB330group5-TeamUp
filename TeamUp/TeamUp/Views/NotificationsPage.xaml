@@ -4,12 +4,42 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TeamUp.Views.NotificationsPage">
+             x:Class="TeamUp.Views.NotificationsPage"
+             
+             >
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Notifications Page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            
+            <StackLayout>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                <ListView x:Name="notificationsListView" 
+                              ItemsSource="{Binding notificationsList}"
+                              RowHeight="100">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Horizontal" >
+                                    <Image Source="{Binding displayedAvatar}" HorizontalOptions="Start"/>
+                                    <StackLayout Orientation="Vertical" >
+                                        <Label Text="{Binding message}" HorizontalOptions="StartAndExpand"/>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Button Text="Accept" Command="{Binding acceptCommand}" IsVisible="{Binding isButtonVisible}"/>
+                                            <Button Text="Decline" Command="{Binding declineCommand}" IsVisible="{Binding isButtonVisible}"/>
+                                        </StackLayout>
+                                        
+                                        
+                                        
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

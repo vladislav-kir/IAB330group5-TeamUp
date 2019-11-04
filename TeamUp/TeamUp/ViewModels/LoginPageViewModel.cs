@@ -62,9 +62,9 @@ namespace TeamUp.ViewModels
                     try
                     {
                         string uid = await AuthenticationFirebase.AuthenticateEmailPasswordAsync(Email, Password);
-                        UsersFirestore.userUID = uid;
 
-                        User user = await UsersFirestore.GetMyProfileAsync();
+                        User user = await UsersFirestore.GetUserByUIDAsync(uid);
+                        UsersFirestore.myProfile = user;
 
                         await App.Current.MainPage.Navigation.PushModalAsync(new EmailPasswordLogInPage(new EmailPasswordLogInPageViewModel(user)));
                     }

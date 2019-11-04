@@ -12,7 +12,8 @@ namespace TeamUp.Services.Firestore
     public class UsersFirestore
     {
         static FirebaseStorage firebaseStorage = new FirebaseStorage("teamup-b7a43.appspot.com");
-        public static string userUID { get; set; }
+        public static User myProfile { get; set; }
+        
         public static async Task<String> GetUserAvatarURLAsync(User user)
         {
             //If the image is not a URL (it is stored on the cloud)
@@ -40,6 +41,7 @@ namespace TeamUp.Services.Firestore
                                         .Instance
                                         .GetCollection("User")
                                         .GetDocument(user_uid)
+                                       
                                         .GetDocumentAsync();
 
             // Convert Document to User Model
@@ -47,7 +49,6 @@ namespace TeamUp.Services.Firestore
 
             // Download avatar image
             user.avatar = await GetUserAvatarURLAsync(user);
-
 
 
             return user;
@@ -59,7 +60,7 @@ namespace TeamUp.Services.Firestore
          */
         public static async Task<User> GetMyProfileAsync()
         {
-            return await GetUserByUIDAsync(userUID);
+            return await GetUserByUIDAsync(UsersFirestore.myProfile.Id);
         }
 
         /*
@@ -110,7 +111,7 @@ namespace TeamUp.Services.Firestore
             return UsersList;
         }
 
-        public static async Task<bool> IsNewUser()
+        public static async Task<bool> IsNewUser(string userUID)
         {
             //Firstly Look up, whether there exists user
             var document = await CrossCloudFirestore.Current
@@ -130,15 +131,66 @@ namespace TeamUp.Services.Firestore
         {
             
             //Check if this user is new ??
-            if (await IsNewUser())
+            if (await IsNewUser(user.Id))
                 await CrossCloudFirestore.Current
                          .Instance
                          .GetCollection("User")
-                         .GetDocument(userUID)
+                         .GetDocument(user.Id)
                          .SetDataAsync(user);
 
         }
 
+        /**
+         * Adds a team to a user
+         */
+        public static async Task AddTeamToUserAsync(string userId, Team team)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("User")
+                         .GetDocument(userId)
+                         .UpdateDataAsync("team", FieldValue.ArrayUnion(team.Id));
+        }
+
+        public static async Task RemoveTeamFromUserAsync(string userId, Team team)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("User")
+                         .GetDocument(userId)
+                         .UpdateDataAsync("team", FieldValue.ArrayRemove(team.Id));
+        }
+
+        /**
+         * Remove user request from a team
+         */
+        public static async Task RemoveTeamInvitationFromUserAsync(string teamId, User user)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("Team")
+                         .GetDocument(user.Id)
+                         .UpdateDataAsync("invitation", FieldValue.ArrayRemove(teamId));
+        }
+
         
+        public static async Task AddNotificationToUserAsync(string userId, string notification_id)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("User")
+                         .GetDocument(userId)
+                         .UpdateDataAsync("notifications", FieldValue.ArrayUnion(notification_id));
+        }
+
+        public static async Task RemoveNotificationFromUserAsync(string userId, string notification_id)
+        {
+            await CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection("User")
+                         .GetDocument(userId)
+                         .UpdateDataAsync("notifications", FieldValue.ArrayRemove(notification_id));
+        }
+
     }
 }

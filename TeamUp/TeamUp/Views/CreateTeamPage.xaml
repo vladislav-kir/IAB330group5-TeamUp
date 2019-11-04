@@ -11,7 +11,7 @@
             <Label Text="Name" />
             <Entry Placeholder="Team name" Text="{Binding Name}"/>
             <Label Text="Sport" />
-            <Picker HorizontalOptions="FillAndExpand" TextColor="{Binding Sport}">
+            <Picker HorizontalOptions="FillAndExpand" SelectedItem="{Binding Sport}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>badminton</x:String>

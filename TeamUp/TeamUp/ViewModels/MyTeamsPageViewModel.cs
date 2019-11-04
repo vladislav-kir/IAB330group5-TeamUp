@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using TeamUp.Services.Firestore;
 using TeamUp.Views;
+using Plugin.CloudFirestore;
 
 namespace TeamUp.ViewModels
 {
@@ -24,6 +25,9 @@ namespace TeamUp.ViewModels
             // Init the usersList
             teamsList = new ObservableCollection<Team>();
             LoadTeamsCommand = new Command(async () => await ExecuteLoadTeamsCommand());
+
+            // Subscribe the snapshot
+            updateTeamInRealTime();
         }
 
         public Command AddTeamCommand
@@ -57,6 +61,28 @@ namespace TeamUp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        /*
+        This function aims to update the Team --> ObservableList in realtime
+        We add a snapshot, when there is an update, we will call ExecuteLoadTeamsCommand() that we have done above
+             */
+        public void updateTeamInRealTime()
+        {
+            CrossCloudFirestore.Current
+                .Instance
+                .GetCollection("User")
+                .GetDocument(UsersFirestore.myProfile.Id)
+
+                //This is the Realtime method, it happens whenever our data is changed (which is the user document)
+                .AddSnapshotListener( async (snapshot, error) =>
+                {
+                    if (snapshot != null)
+                    {
+                        //Load the team again when changed
+                        await ExecuteLoadTeamsCommand();
+                    }
+                });
         }
     }
 }

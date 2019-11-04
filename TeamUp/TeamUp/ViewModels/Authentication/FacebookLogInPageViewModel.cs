@@ -58,7 +58,7 @@ namespace TeamUp.ViewModels
         public void FirstUserInit(string uid)
         {
             User = new User { name = facebookProfile.Name, avatar = facebookProfile.Picture.Data.Url };
-            //User.uid = uid;
+
         }
 
 
@@ -68,6 +68,8 @@ namespace TeamUp.ViewModels
             {
                 return new Command(async () =>
                 {
+                    UsersFirestore.myProfile = user;
+
                     await UsersFirestore.AddUserAsync(user);
                     App.Current.MainPage = new AppBase();
                 });

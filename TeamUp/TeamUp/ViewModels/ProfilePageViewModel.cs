@@ -35,6 +35,7 @@ namespace TeamUp.ViewModels
             User = UsersFirestore.myProfile;
 
             LoadMyProfile = new Command(async () => await loadMyProfileAsync());
+            LoadMyProfile.Execute(null);
 
         }
 

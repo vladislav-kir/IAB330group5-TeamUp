@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using TeamUp.Models;
 using TeamUp.Services;
 using Xamarin.Forms;
-using TeamUp.Services;
 using TeamUp.Services.Firestore;
 
 namespace TeamUp.ViewModels
